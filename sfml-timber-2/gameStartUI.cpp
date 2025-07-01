@@ -11,17 +11,17 @@ void GameStartUI::Init()
 	fontId = "fonts/KOMIKAP_.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-	startTextPos = { bounds.width * 0.5f, 550 };
-	exitTextPos = { bounds.width * 0.5f, 750 };
+	textPos.push_back({ bounds.width * 0.5f, 550 });
+	textPos.push_back({ bounds.width * 0.5f, 750 });
 
 	startText.SetCharacterSize(100);
 	startText.SetFillColor(sf::Color::White);
-	startText.SetPosition(startTextPos);
+	startText.SetPosition(textPos[0]);
 	startText.SetOrigin(Origins::MC);
 
 	exitText.SetCharacterSize(100);
 	exitText.SetFillColor(sf::Color::White);
-	exitText.SetPosition(exitTextPos);
+	exitText.SetPosition(textPos[1]);
 	exitText.SetOrigin(Origins::MC);
 
 	chooseBar.setFillColor(sf::Color(0,0,0,0));
@@ -45,11 +45,13 @@ void GameStartUI::Reset()
 	startText.SetString("Game Start!");
 	exitText.SetString("Exit Game!");
 
-	chooseBar.setPosition(startTextPos + sf::Vector2f{0.f, 25.f});
+	chooseBarPos = 0;
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{0.f, 25.f});
 }
 
 void GameStartUI::Update(float dt)
 {
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
 }
 
 void GameStartUI::Draw(sf::RenderWindow& window)

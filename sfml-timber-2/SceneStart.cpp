@@ -70,8 +70,17 @@ void SceneStart::Update(float dt)
 {
 	Scene::Update(dt);
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+	if (InputMgr::GetKeyDown(sf::Keyboard::Down) || InputMgr::GetKeyDown(sf::Keyboard::Up))
+	{
+		startUI->SetBarPos(startUI->GetMenuCount() - startUI->GetBarPos() - 1);
+	}
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !startUI->GetBarPos())
 	{
 		SCENE_MGR.ChangeScene(SceneIds::Game);
+	}
+	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && startUI->GetBarPos())
+	{
+		FRAMEWORK.GetWindow().close();
 	}
 }
