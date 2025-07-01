@@ -12,7 +12,7 @@ void SceneDev1::Init()
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
 	TextGo* go = new TextGo("fonts/KOMIKAP_.ttf");
-	go->SetString("Dev 1");
+	go->SetString("Main Screen");
 	go->SetCharacterSize(30);
 	go->SetFillColor(sf::Color::White);
 	AddGameObject(go);
@@ -24,6 +24,6 @@ void SceneDev1::Update(float dt)
 {
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SCENE_MGR.ChangeScene(SceneIds::Dev2);
+		SCENE_MGR.ChangeScene(SceneIds::Game);
 	}
 }

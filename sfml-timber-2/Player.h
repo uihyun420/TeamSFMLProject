@@ -30,6 +30,8 @@ public:
 	void SetSide(Sides s);
 	Sides GetSide() const { return side; }
 
+	void SetScale(const sf::Vector2f& scale) override;
+
 	void SetPosition(const sf::Vector2f& pos) override;
 
 	void Init() override;

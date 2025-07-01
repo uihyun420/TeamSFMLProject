@@ -85,6 +85,11 @@ void SceneGame::Update(float dt)
 {
     Scene::Update(dt);
 
+    if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+    {
+        SCENE_MGR.ChangeScene(SceneIds::Dev2);
+    }
+
     if (isPlaying)
     {
         if (InputMgr::GetKeyDown(sf::Keyboard::Left))

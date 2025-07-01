@@ -14,6 +14,7 @@ enum class SceneIds
 {
 	None = -1,
 	Game,
+	GameStart,
 	Dev1,
 	Dev2,
 	Count,
