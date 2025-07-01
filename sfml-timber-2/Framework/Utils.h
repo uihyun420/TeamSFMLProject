@@ -10,6 +10,8 @@ private:
 public:
 	static void Init();
 
+	static float getDistanceWithSize(const sf::Sprite& a, const sf::Sprite& b);
+
 	// Random
 	static float RandomValue(); // 0.0f ~ 1.0f
 	static int RandomRange(int min, int maxExclude);

@@ -19,6 +19,8 @@ public:
 
 	Sides GetSide() const { return branchesSide[branchesSide.size() - 1]; }
 
+	sf::Sprite GetSprite() const { return tree; }
+
 	void Init() override;
 	void Release() override;
 	void Reset() override;

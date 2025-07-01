@@ -26,6 +26,9 @@ public:
 	
 	void SetAlive(bool alive);
 	void SetDrawAxe(bool draw) { drawAxe = draw; }
+	bool GetDrawAxe() const { return drawAxe; }
+
+	sf::Sprite GetSprite() const { return sprite; }
 
 	void SetSide(Sides s);
 	Sides GetSide() const { return side; }
