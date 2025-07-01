@@ -7,6 +7,11 @@ BackgroundElement::BackgroundElement(const std::string& texPlayerId, const std::
 {
 }
 
+void BackgroundElement::SetStartPos(sf::Vector2f v)
+{
+	startPos = v;
+}
+
 void BackgroundElement::SetSide(Sides side)
 {
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
@@ -66,6 +71,11 @@ void BackgroundElement::Update(float dt)
 		timer += dt;
 		pos.x += direction.x * speed * dt;
 		pos.y = startPos.y + amplitude * sin(timer * frequency);
+		break;
+	case BackgroundElement::MoveType::Fly:
+		sf::Vector2f dir((rand() % 2 == 0) ? -1.f : 1.f, -1.f);
+		LogsVel.push_back(dir * logSpeed);
+		FlyingLogs.push_back(true);
 		break;
 	}
 

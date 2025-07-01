@@ -26,6 +26,7 @@ void SceneGame::Init()
     texIds.push_back("graphics/player.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
+    texIds.push_back("graphics/log.png");
 
     fontIds.push_back("fonts/KOMIKAP_.ttf");
 
@@ -40,6 +41,8 @@ void SceneGame::Init()
     }
 
     tree = (Tree*)AddGameObject(new Tree());
+
+
 
     BackgroundElement* element = (BackgroundElement*)AddGameObject(
         new BackgroundElement("graphics/bee.png"));
@@ -93,12 +96,12 @@ void SceneGame::Update(float dt)
             player->SetSide(Sides::Left);
             if (tree->GetSide() == player->GetSide())
             {
-                isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
 
                 uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");
+                isPlaying = false;
             }
             else
             {
@@ -129,6 +132,25 @@ void SceneGame::Update(float dt)
 
         player->SetDrawAxe(
             InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
+        if(!isPlaying) player->SetDrawAxe(false);
+
+        std::vector <BackgroundElement*> Logs;
+
+        if (player->GetDrawAxe()) {
+            BackgroundElement* log = (BackgroundElement*)AddGameObject(
+                new BackgroundElement("graphics/log.png"));
+            log->SetStartPos({ tree->GetSprite().getPosition().x, tree->GetSprite().getGlobalBounds().height });
+            Logs.push_back(log);
+        }
+
+        for (int i = 0; i < Logs.size(); i++) {
+            if (Logs[i]->FlyingLogs[i]) {
+                sf::Vector2f gravity = { 0.f, 4000.f };
+                Logs[i]->LogsVel[i] += gravity * dt;
+                Logs[i]->GetSprite().move(Logs[i]->LogsVel[i] * dt);
+            }
+        }
+
      
         timer -= dt;
         if (timer <= 0.f)
