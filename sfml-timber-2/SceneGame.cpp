@@ -74,6 +74,8 @@ void SceneGame::Enter()
 
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
+
+    isPlaying = false;
 }
 
 void SceneGame::Exit()

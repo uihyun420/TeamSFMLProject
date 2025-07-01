@@ -4,6 +4,7 @@
 #include "TextGo.h"
 #include "Player.h"
 #include "Tree.h"
+#include "GameStartUI.h"
 
 SceneStart::SceneStart()
 	: Scene(SceneIds::GameStart)
@@ -39,6 +40,8 @@ void SceneStart::Init()
 	go->SetOrigin(Origins::MC);
 	go->SetPosition({ FRAMEWORK.GetWindowBounds().width / 2.f, FRAMEWORK.GetWindowBounds().height / 2.f - 300.f });
 	AddGameObject(go);
+
+	startUI = (GameStartUI*)AddGameObject(new GameStartUI());
 
 	Scene::Init();
 }

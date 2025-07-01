@@ -69,7 +69,7 @@
     <ClCompile Include="SceneStart.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="gameStartUI.cpp">
+    <ClCompile Include="GameStartUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,7 +134,7 @@
     <ClInclude Include="SceneStart.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="gameStartUI.h">
+    <ClInclude Include="GameStartUI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

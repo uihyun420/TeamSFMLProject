@@ -59,7 +59,7 @@ void UiHud::Reset()
 	textMessage.setFont(FONT_MGR.Get(fontId));
 
 	SetScore(0);
-	isShowMessage = true;
+	isShowMessage = false;
 	SetMessage("Message!");
 	SetTimeBar(1.f);
 }

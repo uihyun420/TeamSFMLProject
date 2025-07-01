@@ -144,7 +144,7 @@
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
-    <ClCompile Include="gameStartUI.cpp" />
+    <ClCompile Include="GameStartUI.cpp" />
     <ClCompile Include="SceneStart.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Framework\SpriteGo.cpp" />
@@ -172,7 +172,7 @@
     <ClInclude Include="Framework\Singleton.h" />
     <ClInclude Include="Framework\SpriteGo.h" />
     <ClInclude Include="Framework\Scene.h" />
-    <ClInclude Include="gameStartUI.h" />
+    <ClInclude Include="GameStartUI.h" />
     <ClInclude Include="SceneStart.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneDev1.h" />
