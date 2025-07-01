@@ -13,6 +13,7 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
+	CharacterSelect,
 	Game,
 	Dev1,
 	Dev2,
