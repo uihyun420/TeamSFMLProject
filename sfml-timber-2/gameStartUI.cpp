@@ -24,13 +24,11 @@ void GameStartUI::Init()
 	exitText.SetPosition(textPos[1]);
 	exitText.SetOrigin(Origins::MC);
 
-	chooseBar.setFillColor(sf::Color(0,0,0,0));
+	chooseBar.setFillColor(sf::Color(0, 0, 0, 0));
 	chooseBar.setOutlineColor(sf::Color::White);
 	chooseBar.setOutlineThickness(3.f);
 	chooseBar.setSize(chooseBarSize);
 	Utils::SetOrigin(chooseBar, Origins::MC);
-
-	
 }
 
 void GameStartUI::Release()
@@ -46,7 +44,7 @@ void GameStartUI::Reset()
 	exitText.SetString("Exit Game!");
 
 	chooseBarPos = 0;
-	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{0.f, 25.f});
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f});
 }
 
 void GameStartUI::Update(float dt)

@@ -20,7 +20,6 @@ void SceneStart::Init()
 	texIds.push_back("graphics/background.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/tree.png");
-	texIds.push_back("graphics/axe.png");
 
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
@@ -72,12 +71,12 @@ void SceneStart::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Down) || InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
-		startUI->SetBarPos(startUI->GetMenuCount() - startUI->GetBarPos() - 1);
+		startUI->SetBarPos((startUI->GetBarPos() + 1) % startUI->GetMenuCount());
 	}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !startUI->GetBarPos())
 	{
-		SCENE_MGR.ChangeScene(SceneIds::Game);
+		SCENE_MGR.ChangeScene(SceneIds::GameMode);
 	}
 	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && startUI->GetBarPos())
 	{
