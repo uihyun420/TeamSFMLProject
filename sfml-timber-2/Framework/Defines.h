@@ -13,12 +13,12 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
-	Game,
 	GameStart,
 	GameMode,
 	Player1Mode,
 	Player2Mode,
-	CharacterChoose,
+	SoloCharacterChoose,
+	DuoCharacterChoose,
 	Dev1,
 	Dev2,
 	Count,

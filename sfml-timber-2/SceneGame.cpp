@@ -9,7 +9,7 @@
 #include "GameOverUI.h"
 
 SceneGame::SceneGame()
-	: Scene(SceneIds::Game)
+	: Scene(SceneIds::Player1Mode)
 {
 }
 
@@ -156,12 +156,24 @@ void SceneGame::Update(float dt)
     }
     else
     {
-        if (InputMgr::GetKeyDown(sf::Keyboard::Down) || InputMgr::GetKeyDown(sf::Keyboard::Up))
+        if (InputMgr::GetKeyDown(sf::Keyboard::Down))
         {
             overUI->SetBarPos((overUI->GetBarPos() + 1) % overUI->GetMenuCount());
         }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+        {
+            overUI->SetBarPos((overUI->GetBarPos() + 2) % overUI->GetMenuCount());
+        }
 
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !overUI->GetBarPos())
+        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos() == (int)Menu::home)
+        {
+            SCENE_MGR.ChangeScene(SceneIds::GameStart);
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos() == (int)Menu::exit)
+        {
+            FRAMEWORK.GetWindow().close();
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {
             FRAMEWORK.SetTimeScale(1.f);
             player->Reset();
@@ -177,10 +189,7 @@ void SceneGame::Update(float dt)
             uiHud->SetShowMassage(false);
             overUI->SetActive(false);
         }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos())
-        {
-            FRAMEWORK.GetWindow().close();
-        }
+        
     }
 
     

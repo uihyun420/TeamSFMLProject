@@ -13,20 +13,17 @@ void GameModeUI::Init()
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 	textPos.push_back({ bounds.width * 0.5f - 450.f, 800.f });
 	textPos.push_back({ bounds.width * 0.5f + 450.f, 800.f });
-
-	soloText.SetCharacterSize(100);
-	soloText.SetFillColor(sf::Color::White);
-	soloText.SetPosition(textPos[0]);
-	soloText.SetOrigin(Origins::MC);
-
-	duoText.SetCharacterSize(100);
-	duoText.SetFillColor(sf::Color::White);
-	duoText.SetPosition(textPos[1]);
-	duoText.SetOrigin(Origins::MC);
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].SetCharacterSize(100);
+		texts[i].SetFillColor(sf::Color::White);
+		texts[i].SetPosition(textPos[i]);
+		texts[i].SetOrigin(Origins::MC);
+	}
 
 	chooseBar.setFillColor(sf::Color(0, 0, 0, 0));
-	chooseBar.setOutlineColor(sf::Color::White);
-	chooseBar.setOutlineThickness(3.f);
+	chooseBar.setOutlineColor(sf::Color::Black);
+	chooseBar.setOutlineThickness(5.f);
 	chooseBar.setSize(chooseBarSize);
 	Utils::SetOrigin(chooseBar, Origins::MC);
 }
@@ -37,11 +34,11 @@ void GameModeUI::Release()
 
 void GameModeUI::Reset()
 {
-	soloText.GetText().setFont(FONT_MGR.Get(fontId));
-	duoText.GetText().setFont(FONT_MGR.Get(fontId));
-
-	soloText.SetString("1 Player");
-	duoText.SetString("2 Player");
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].GetText().setFont(FONT_MGR.Get(fontId));
+		texts[i].SetString(textMessages[i]);
+	}
 
 	chooseBarPos = 0;
 	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
@@ -50,11 +47,24 @@ void GameModeUI::Reset()
 void GameModeUI::Update(float dt)
 {
 	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	for (int i = 0; i < menuCount; i++)
+	{
+		if (i == chooseBarPos)
+		{
+			texts[i].SetFillColor(sf::Color::Black);
+		}
+		else
+		{
+			texts[i].SetFillColor(sf::Color::White);
+		}
+	}
 }
 
 void GameModeUI::Draw(sf::RenderWindow& window)
 {
-	soloText.Draw(window);
-	duoText.Draw(window);
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].Draw(window);
+	}
 	window.draw(chooseBar);
 }

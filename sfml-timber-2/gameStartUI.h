@@ -4,12 +4,12 @@
 class GameStartUI : public GameObject
 {
 protected:
-	TextGo startText;
-	TextGo exitText;
+	TextGo texts[2];
 	sf::RectangleShape chooseBar;
 
 	sf::Vector2f chooseBarSize = { 700.f, 100.f };
 	std::vector<sf::Vector2f> textPos;
+	std::vector<std::string> textMessages = { "Game Start!", "Exit Game!" };
 
 	std::string fontId;
 

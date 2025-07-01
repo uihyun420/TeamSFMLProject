@@ -4,12 +4,12 @@
 class GameModeUI : public GameObject
 {
 protected:
-	TextGo soloText;
-	TextGo duoText;
+	TextGo texts[2];
 	sf::RectangleShape chooseBar;
 
 	sf::Vector2f chooseBarSize = { 500.f, 100.f };
 	std::vector<sf::Vector2f> textPos;
+	std::vector<std::string> textMessages = { "1 Player","2 Player" };
 
 	std::string fontId;
 

@@ -4,17 +4,18 @@
 class GameOverUI : public GameObject
 {
 protected:
-	TextGo restartText;
-	TextGo exitText;
+	TextGo texts[3];
+	
 	sf::RectangleShape chooseBar;
 
 	sf::Vector2f chooseBarSize = { 800.f, 100.f };
 	std::vector<sf::Vector2f> textPos;
+	std::vector<std::string> textMessages = { "Go to main!", "Game Restart!", "Exit Game" };
 
 	std::string fontId;
 
-	int chooseBarPos = 0;
-	int menuCount = 2;
+	int chooseBarPos = 1;
+	int menuCount = 3;
 
 public:
 	GameOverUI(const std::string& name = "");

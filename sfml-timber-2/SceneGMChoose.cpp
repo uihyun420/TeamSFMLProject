@@ -83,11 +83,11 @@ void SceneGMChoose::Update(float dt)
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !gameModeUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
-		SCENE_MGR.ChangeScene(SceneIds::Game);
+		SCENE_MGR.ChangeScene(SceneIds::SoloCharacterChoose);
 	}
 	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && gameModeUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
-		SCENE_MGR.ChangeScene(SceneIds::Dev2);
+		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 	}
 }

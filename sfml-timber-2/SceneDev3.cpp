@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "SceneDev1.h"
+#include "SceneDev3.h"
 #include "TextGo.h"
 
-SceneDev1::SceneDev1()
-	: Scene(SceneIds::SoloCharacterChoose)
+SceneDev3::SceneDev3()
+	:Scene(SceneIds::Player2Mode)
 {
 }
 
-void SceneDev1::Init()
+void SceneDev3::Init()
 {
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
 	TextGo* go = new TextGo("fonts/KOMIKAP_.ttf");
-	go->SetString("Solo character choose scene");
+	go->SetString("Duo player Mode");
 	go->SetCharacterSize(30);
 	go->SetFillColor(sf::Color::White);
 	AddGameObject(go);
@@ -20,10 +20,10 @@ void SceneDev1::Init()
 	Scene::Init();
 }
 
-void SceneDev1::Update(float dt)
+void SceneDev3::Update(float dt)
 {
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
+		SCENE_MGR.ChangeScene(SceneIds::GameStart);
 	}
 }

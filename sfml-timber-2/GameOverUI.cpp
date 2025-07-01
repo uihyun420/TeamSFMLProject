@@ -11,22 +11,21 @@ void GameOverUI::Init()
 	fontId = "fonts/KOMIKAP_.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+	textPos.push_back({ bounds.width * 0.5f, 350 });
 	textPos.push_back({ bounds.width * 0.5f, 550 });
 	textPos.push_back({ bounds.width * 0.5f, 750 });
 
-	restartText.SetCharacterSize(100);
-	restartText.SetFillColor(sf::Color::White);
-	restartText.SetPosition(textPos[0]);
-	restartText.SetOrigin(Origins::MC);
-
-	exitText.SetCharacterSize(100);
-	exitText.SetFillColor(sf::Color::White);
-	exitText.SetPosition(textPos[1]);
-	exitText.SetOrigin(Origins::MC);
+	for(int i = 0; i< menuCount; i++)
+	{
+		texts[i].SetCharacterSize(100);
+		texts[i].SetFillColor(sf::Color::White);
+		texts[i].SetPosition(textPos[i]);
+		texts[i].SetOrigin(Origins::MC);
+	}
 
 	chooseBar.setFillColor(sf::Color(0, 0, 0, 0));
-	chooseBar.setOutlineColor(sf::Color::White);
-	chooseBar.setOutlineThickness(3.f);
+	chooseBar.setOutlineColor(sf::Color::Black);
+	chooseBar.setOutlineThickness(5.f);
 	chooseBar.setSize(chooseBarSize);
 	Utils::SetOrigin(chooseBar, Origins::MC);
 }
@@ -37,27 +36,40 @@ void GameOverUI::Release()
 
 void GameOverUI::Reset()
 {
-	restartText.GetText().setFont(FONT_MGR.Get(fontId));
-	exitText.GetText().setFont(FONT_MGR.Get(fontId));
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].GetText().setFont(FONT_MGR.Get(fontId));
+		texts[i].SetString(textMessages[i]);
+	}
 
-	restartText.SetString("Game Restart!");
-	exitText.SetString("Exit Game");
-
-	chooseBarPos = 0;
+	chooseBarPos = 1;
 	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
 }
 
 void GameOverUI::Update(float dt)
 {
 	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	for (int i = 0; i < menuCount; i++)
+	{
+		if (i == chooseBarPos)
+		{
+			texts[i].SetFillColor(sf::Color::Black);
+		}
+		else
+		{
+			texts[i].SetFillColor(sf::Color::White);
+		}
+	}
 }
 
 void GameOverUI::Draw(sf::RenderWindow& window)
 {
 	if (active)
 	{
-		restartText.Draw(window);
-		exitText.Draw(window);
+		for (int i = 0; i < menuCount; i++)
+		{
+			texts[i].Draw(window);
+		}
 		window.draw(chooseBar);
 	}
 }

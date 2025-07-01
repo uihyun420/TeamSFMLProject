@@ -14,19 +14,17 @@ void GameStartUI::Init()
 	textPos.push_back({ bounds.width * 0.5f, 550 });
 	textPos.push_back({ bounds.width * 0.5f, 750 });
 
-	startText.SetCharacterSize(100);
-	startText.SetFillColor(sf::Color::White);
-	startText.SetPosition(textPos[0]);
-	startText.SetOrigin(Origins::MC);
-
-	exitText.SetCharacterSize(100);
-	exitText.SetFillColor(sf::Color::White);
-	exitText.SetPosition(textPos[1]);
-	exitText.SetOrigin(Origins::MC);
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].SetCharacterSize(100);
+		texts[i].SetFillColor(sf::Color::White);
+		texts[i].SetPosition(textPos[i]);
+		texts[i].SetOrigin(Origins::MC);
+	}
 
 	chooseBar.setFillColor(sf::Color(0, 0, 0, 0));
-	chooseBar.setOutlineColor(sf::Color::White);
-	chooseBar.setOutlineThickness(3.f);
+	chooseBar.setOutlineColor(sf::Color::Black);
+	chooseBar.setOutlineThickness(5.f);
 	chooseBar.setSize(chooseBarSize);
 	Utils::SetOrigin(chooseBar, Origins::MC);
 }
@@ -37,11 +35,11 @@ void GameStartUI::Release()
 
 void GameStartUI::Reset()
 {
-	startText.GetText().setFont(FONT_MGR.Get(fontId));
-	exitText.GetText().setFont(FONT_MGR.Get(fontId));
-
-	startText.SetString("Game Start!");
-	exitText.SetString("Exit Game!");
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].GetText().setFont(FONT_MGR.Get(fontId));
+		texts[i].SetString(textMessages[i]);
+	}
 
 	chooseBarPos = 0;
 	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f});
@@ -50,12 +48,25 @@ void GameStartUI::Reset()
 void GameStartUI::Update(float dt)
 {
 	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	for (int i = 0; i < menuCount; i++)
+	{
+		if (i == chooseBarPos)
+		{
+			texts[i].SetFillColor(sf::Color::Black);
+		}
+		else
+		{
+			texts[i].SetFillColor(sf::Color::White);
+		}
+	}
 }
 
 void GameStartUI::Draw(sf::RenderWindow& window)
 {
-	startText.Draw(window);
-	exitText.Draw(window);
+	for (int i = 0; i < menuCount; i++)
+	{
+		texts[i].Draw(window);
+	}
 	window.draw(chooseBar);
 }
 

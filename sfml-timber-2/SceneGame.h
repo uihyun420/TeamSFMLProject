@@ -19,6 +19,13 @@ protected:
 	float timer = 0.f;
 	float timerMax = 5.f;
 
+	enum class Menu
+	{
+		home,
+		restart,
+		exit
+	};
+
 public:
 	SceneGame();
 	~SceneGame() override;
