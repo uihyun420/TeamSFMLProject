@@ -145,6 +145,7 @@
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
     <ClCompile Include="GameModeUI.cpp" />
+    <ClCompile Include="GameOverUI.cpp" />
     <ClCompile Include="GameStartUI.cpp" />
     <ClCompile Include="SceneGMChoose.cpp" />
     <ClCompile Include="SceneStart.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Framework\SpriteGo.h" />
     <ClInclude Include="Framework\Scene.h" />
     <ClInclude Include="GameModeUI.h" />
+    <ClInclude Include="GameOverUI.h" />
     <ClInclude Include="GameStartUI.h" />
     <ClInclude Include="SceneGMChoose.h" />
     <ClInclude Include="SceneStart.h" />
