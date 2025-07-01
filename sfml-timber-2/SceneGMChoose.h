@@ -4,6 +4,7 @@
 class Player;
 class Tree;
 class GameModeUI;
+class SpriteGo;
 
 class SceneGMChoose : public Scene
 {
@@ -11,6 +12,9 @@ protected:
 	Player* player;
 	Tree* tree[3];
 	GameModeUI* gameModeUI;
+
+	SpriteGo* solo;
+	SpriteGo* duo;
 
 public:
 	SceneGMChoose();

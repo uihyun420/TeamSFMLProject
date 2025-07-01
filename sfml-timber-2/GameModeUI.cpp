@@ -11,8 +11,8 @@ void GameModeUI::Init()
 	fontId = "fonts/KOMIKAP_.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-	textPos.push_back({ bounds.width * 0.5f - 400.f, 800 });
-	textPos.push_back({ bounds.width * 0.5f + 400.f, 800 });
+	textPos.push_back({ bounds.width * 0.5f - 450.f, 800.f });
+	textPos.push_back({ bounds.width * 0.5f + 450.f, 800.f });
 
 	soloText.SetCharacterSize(100);
 	soloText.SetFillColor(sf::Color::White);
