@@ -16,6 +16,7 @@ SceneGame::~SceneGame()
 {
 }
 
+
 void SceneGame::Init()
 {
     texIds.push_back("graphics/background.png");
@@ -55,6 +56,7 @@ void SceneGame::Init()
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
     player = (Player*)AddGameObject(new Player());
+    player2 = (Player*)AddGameObject(new Player("Player2"));
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
@@ -68,6 +70,9 @@ void SceneGame::Enter()
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
+    player2->SetPosition(pos);
+    player2->SetSide(Sides::Left);
+
 
     score = 0;
     uiHud->SetScore(score);
@@ -84,12 +89,55 @@ void SceneGame::Exit()
     Scene::Exit();
 }
 
+void SceneGame::CreateLog(Player* p)
+{
+    BackgroundElement* log = (BackgroundElement*)AddGameObject(
+        new BackgroundElement("graphics/log.png"));
+    log->Reset();
+
+    log->SetActive(true);
+    //log->SetStartPos({ tree->GetSprite().getPosition().x, tree->GetSprite().getGlobalBounds().height });
+    sf::Vector2f startPos = p->GetSprite().getPosition();
+    startPos.y = tree->GetSprite().getGlobalBounds().height;
+    log->SetStartPos(startPos);
+    log->SetMoveType(BackgroundElement::MoveType::Fly);
+
+    sf::Vector2f dir((rand() % 2 == 0) ? -1.f : 1.f, -1.f);
+    log->vel = dir * log->logSpeed;
+    log->isFlying = true;
+
+    Logs.push_back(log);
+}
+
 void SceneGame::Update(float dt)
 {
     Scene::Update(dt);
 
     if (isPlaying)
     {
+        if (InputMgr::GetKeyDown(sf::Keyboard::A)) {
+            player2->SetSide(Sides::Left);
+            //tree->UpdateBranches(); 
+            if (tree->GetSide() == player2->GetSide()) {
+                player2->SetAlive(false);
+                isPlaying = false;
+            }
+            else {
+                score2 += 10;
+            }
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::D)) {
+            player2->SetSide(Sides::Right);
+            //tree->UpdateBranches();
+            if (tree->GetSide() == player2->GetSide()) {
+                player2->SetAlive(false);
+                isPlaying = false;
+            }
+            else {
+                score2 += 10;
+            }
+        }
+
         if (InputMgr::GetKeyDown(sf::Keyboard::Left))
         {
             tree->UpdateBranches();
@@ -132,24 +180,22 @@ void SceneGame::Update(float dt)
 
         player->SetDrawAxe(
             InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
-        if(!isPlaying) player->SetDrawAxe(false);
+        player2->SetDrawAxe(
+            InputMgr::GetKey(sf::Keyboard::A) || InputMgr::GetKey(sf::Keyboard::D));
 
-        std::vector <BackgroundElement*> Logs;
-
-        if (player->GetDrawAxe()) {
-            BackgroundElement* log = (BackgroundElement*)AddGameObject(
-                new BackgroundElement("graphics/log.png"));
-            log->SetStartPos({ tree->GetSprite().getPosition().x, tree->GetSprite().getGlobalBounds().height });
-            Logs.push_back(log);
+        if (!isPlaying) {
+            player->SetDrawAxe(false);
+            player2->SetDrawAxe(false);
         }
 
-        for (int i = 0; i < Logs.size(); i++) {
-            if (Logs[i]->FlyingLogs[i]) {
-                sf::Vector2f gravity = { 0.f, 4000.f };
-                Logs[i]->LogsVel[i] += gravity * dt;
-                Logs[i]->GetSprite().move(Logs[i]->LogsVel[i] * dt);
-            }
+        if (InputMgr::GetKeyDown(sf::Keyboard::Right) || InputMgr::GetKeyDown(sf::Keyboard::Left)) {
+            CreateLog(player);
         }
+
+        if (InputMgr::GetKeyDown(sf::Keyboard::A) || InputMgr::GetKeyDown(sf::Keyboard::D)) {
+            CreateLog(player2);
+        }
+
 
      
         timer -= dt;
@@ -172,6 +218,8 @@ void SceneGame::Update(float dt)
         {
             FRAMEWORK.SetTimeScale(1.f);
             player->Reset();
+            player2->Reset();
+            //player2->SetSide(Sides::Left);
             tree->Reset();
             isPlaying = true;
 
@@ -187,3 +235,4 @@ void SceneGame::Update(float dt)
 
     
 }
+

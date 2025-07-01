@@ -10,6 +10,7 @@ BackgroundElement::BackgroundElement(const std::string& texPlayerId, const std::
 void BackgroundElement::SetStartPos(sf::Vector2f v)
 {
 	startPos = v;
+	SetPosition(v);
 }
 
 void BackgroundElement::SetSide(Sides side)
@@ -64,26 +65,39 @@ void BackgroundElement::Update(float dt)
 
 	switch (moveType)
 	{
-	case BackgroundElement::MoveType::Linear:
+	case MoveType::Linear:
 		pos += direction * speed * dt;
 		break;
-	case BackgroundElement::MoveType::Wave:
+
+	case MoveType::Wave:
 		timer += dt;
 		pos.x += direction.x * speed * dt;
 		pos.y = startPos.y + amplitude * sin(timer * frequency);
 		break;
-	case BackgroundElement::MoveType::Fly:
-		sf::Vector2f dir((rand() % 2 == 0) ? -1.f : 1.f, -1.f);
-		LogsVel.push_back(dir * logSpeed);
-		FlyingLogs.push_back(true);
+
+	case MoveType::Fly:
+		if (isFlying)
+		{
+			sf::Vector2f gravity(0.f, 4000.f);
+			vel += gravity * dt;
+			pos += vel * dt;
+		}
 		break;
 	}
 
 	SetPosition(pos);
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-	if (pos.x < -200.f || pos.x > bounds.width + 200.f)
+
+	if (moveType != MoveType::Fly && (pos.x < -200.f || pos.x > bounds.width + 200.f))
 	{
 		SetSide((Sides)Utils::RandomRange(0, 2));
+	}
+
+	if (moveType == MoveType::Fly && (
+		pos.x < -400.f || pos.x > bounds.width + 400.f || pos.y > bounds.height + 200.f))
+	{
+		isFlying = false;
+		SetActive(false);  
 	}
 }

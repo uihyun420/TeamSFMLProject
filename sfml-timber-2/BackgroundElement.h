@@ -27,8 +27,8 @@ public:
 	float speed = 0.f;
 	float logSpeed = 3000.f;
 
-	std::vector <sf::Vector2f> LogsVel;
-	std::vector <bool> FlyingLogs;
+	sf::Vector2f vel;  
+	bool isFlying = false;
 
 	sf::Vector2f direction;
 
