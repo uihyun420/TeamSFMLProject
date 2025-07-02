@@ -2,7 +2,6 @@
 #include "Scene.h"
 #include "TextGo.h"
 #include "CharacterInfo.h"
-#include "GameModeUI.h"
 
 class CharacterSelectScene :
     public Scene

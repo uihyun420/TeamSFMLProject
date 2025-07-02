@@ -56,9 +56,14 @@ void SceneMgr::Release()
 	scenes.clear();
 }
 
-void SceneMgr::ChangeScene(SceneIds id)
+void SceneMgr::ChangeScene(SceneIds id, bool duo, SceneIds duomode)
 {
 	nextScene = id;
+	isDuo = duo;
+	if (isDuo)
+	{
+		this->duomode = duomode;
+	}
 }
 
 void SceneMgr::Update(float dt)
@@ -77,30 +82,4 @@ void SceneMgr::Update(float dt)
 void SceneMgr::Draw(sf::RenderWindow& window)
 {
 	scenes[(int)currentScene]->Draw(window);
-}
-
-
-
-
-
-
-
-void SceneMgr::SetChosenChar1(const std::string& s)
-{
-	chosenChar1 = s;
-}
-
-void SceneMgr::SetChosenChar2(const std::string& s)
-{
-	chosenChar2 = s;
-}
-
-const std::string& SceneMgr::GetChosenChar1()
-{
-	return chosenChar1;
-}
-
-const std::string& SceneMgr::GetChosenChar2()
-{
-	return chosenChar2;
 }

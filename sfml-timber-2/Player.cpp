@@ -22,6 +22,13 @@ void Player::SetAlive(bool alive)
 	Utils::SetOrigin(sprite, Origins::BC);
 }
 
+void Player::SetTexId(const std::string& texid)
+{
+	texPlayerId = texid;
+	sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
+	Utils::SetOrigin(sprite, Origins::BC);
+}
+
 void Player::SetSide(Sides s)
 {
 	side = s;

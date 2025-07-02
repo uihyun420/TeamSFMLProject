@@ -27,6 +27,8 @@ protected:
 	float timer2 = 0.f;
 	float timerMax = 5.f;
 
+	float playerSpeed = 1000.f;
+
 public:
 	SceneGame3();
 	~SceneGame3() override;

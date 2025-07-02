@@ -29,7 +29,9 @@ public:
 	void SetDrawAxe(bool draw) { drawAxe = draw; }
 	bool GetDrawAxe() const { return drawAxe; }
 
-	sf::Sprite GetSprite() const { return sprite; }
+	sf::Sprite& GetSprite() { return sprite; }
+
+	void SetTexId(const std::string& id);
 
 	void SetSide(Sides s);
 	Sides GetSide() const { return side; }

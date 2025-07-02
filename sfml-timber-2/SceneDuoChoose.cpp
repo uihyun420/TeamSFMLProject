@@ -3,6 +3,8 @@
 #include "SpriteGo.h"
 #include "MenuUI.h"
 
+int mode = 0;
+
 SceneDuoChoose::SceneDuoChoose()
 	:Scene(SceneIds::DuoMode)
 {
@@ -89,11 +91,11 @@ void SceneDuoChoose::Update(float dt)
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
-		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
+		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose, true, SceneIds::Player2Mode);
 	}
 	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
-		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
+		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose, true, SceneIds::ChallangeMode);
 	}
 }

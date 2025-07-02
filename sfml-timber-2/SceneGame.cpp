@@ -6,7 +6,6 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
-#include "GameOverUI.h"
 #include "CharacterSelectScene.h"
 #include "DuoCharacterSelectScene.h"
 

@@ -26,13 +26,12 @@ void SceneGame3::Init()
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
+    texIds.push_back("graphics/player2.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
     texIds.push_back("graphics/log.png");
 
-    fontIds.push_back("fonts/KOMIKAP_.ttf");
-
-    //
+    fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
     AddGameObject(new SpriteGo("graphics/background.png"));
 
@@ -43,8 +42,6 @@ void SceneGame3::Init()
     }
 
     tree = (Tree*)AddGameObject(new Tree());
-
-
 
     BackgroundElement* element = (BackgroundElement*)AddGameObject(
         new BackgroundElement("graphics/bee.png"));
@@ -104,12 +101,12 @@ void SceneGame3::Enter()
     player->SetPosition(pos);
     player2->SetPosition(pos);
     player2->SetSide(Sides::Left);
-
+    player2->SetTexId("graphics/player2.png");
 
     score = 0;
     uiHud->SetScore(score);
 
-    timer = timerMax;
+    timer = 0;
     uiHud->SetTimeBar(timer / timerMax);
 
     uiHud->SetShowMassage(true);
@@ -154,29 +151,50 @@ void SceneGame3::Update(float dt)
             tree->UpdateBranches();
             bgTime = 0;
         }
-        if (InputMgr::GetKeyDown(sf::Keyboard::A)) {
-            player2->SetSide(Sides::Left);
+
+        sf::Vector2u playerSize = player->GetSprite().getTexture()->getSize();
+        sf::Vector2f player1Pos = player->GetSprite().getPosition();
+        sf::Vector2f player2Pos = player2->GetSprite().getPosition();
+
+        if (InputMgr::GetKey(sf::Keyboard::A) && player2Pos.x >= playerSize.x / 2.f) {
+            //player2->SetSide(Sides::Left);
+            player2Pos += playerSpeed * dt * sf::Vector2f({-1.f,0.f});
+            player2->GetSprite().setPosition(player2Pos);
+            player2->SetScale({ 1.f,1.f });
             //tree->UpdateBranches(); 
         }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::D)) {
-            player2->SetSide(Sides::Right);
+        else if (InputMgr::GetKey(sf::Keyboard::D) && player2Pos.x <= 1920 - playerSize.x / 2.f) {
+            //player2->SetSide(Sides::Right);
+            player2Pos += playerSpeed * dt * sf::Vector2f({ 1.f,0.f });
+            player2->GetSprite().setPosition(player2Pos);
+            player2->SetScale({ -1.f,1.f });
             //tree->UpdateBranches();
         }
-
-        if (InputMgr::GetKeyDown(sf::Keyboard::Left))
+        else if (InputMgr::GetKey(sf::Keyboard::W))
         {
-            player->SetSide(Sides::Left);
+
         }
 
-        if (InputMgr::GetKeyDown(sf::Keyboard::Right))
+        if (InputMgr::GetKey(sf::Keyboard::Left) && player1Pos.x >= playerSize.x / 2.f)
         {
-            player->SetSide(Sides::Right);
+            //player->SetSide(Sides::Left);
+            player1Pos += playerSpeed * dt * sf::Vector2f({ -1.f,0.f });
+            player->GetSprite().setPosition(player1Pos);
+            player->SetScale({ 1.f,1.f });
         }
 
-        player->SetDrawAxe(
+        if (InputMgr::GetKey(sf::Keyboard::Right) && player1Pos.x <= 1920 - playerSize.x / 2.f)
+        {
+            //player->SetSide(Sides::Right);
+            player1Pos += playerSpeed * dt * sf::Vector2f({ 1.f,0.f });
+            player->GetSprite().setPosition(player1Pos);
+            player->SetScale({ -1.f,1.f });
+        }
+
+        /*player->SetDrawAxe(
             InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
         player2->SetDrawAxe(
-            InputMgr::GetKey(sf::Keyboard::A) || InputMgr::GetKey(sf::Keyboard::D));
+            InputMgr::GetKey(sf::Keyboard::A) || InputMgr::GetKey(sf::Keyboard::D));*/
 
         if (!isPlaying) {
             player->SetDrawAxe(false);
@@ -190,23 +208,20 @@ void SceneGame3::Update(float dt)
         if (InputMgr::GetKeyDown(sf::Keyboard::A) || InputMgr::GetKeyDown(sf::Keyboard::D)) {
             CreateLog(player2);
         }
+        //timer -= dt;
+        //if (timer <= 0.f)
+        //{
+        //    timer = 0.f;
 
+        //    isPlaying = false;
+        //    FRAMEWORK.SetTimeScale(0.f);
+        //    player->SetAlive(false);
 
-
-        timer -= dt;
-        if (timer <= 0.f)
-        {
-            timer = 0.f;
-
-            isPlaying = false;
-            FRAMEWORK.SetTimeScale(0.f);
-            player->SetAlive(false);
-
-            menuUI->SetActive(true);
-            /*uiHud->SetShowMassage(true);
-            uiHud->SetMessage("Enter to Restart!");*/
-        }
-        uiHud->SetTimeBar(timer / timerMax);
+        //    menuUI->SetActive(true);
+        //    /*uiHud->SetShowMassage(true);
+        //    uiHud->SetMessage("Enter to Restart!");*/
+        //}
+        //uiHud->SetTimeBar(timer / timerMax);
     }
     else
     {
@@ -246,7 +261,7 @@ void SceneGame3::Update(float dt)
             score = 0;
             uiHud->SetScore(score);
 
-            timer = timerMax;
+            timer = 0;
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);

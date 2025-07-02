@@ -86,10 +86,9 @@ void DuoCharacterSelectScene::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
-		if (phase == Choice::Choice01)
-			phase = Choice::Choice02;
-		else
-			SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
+		bool isDuo = SCENE_MGR.GetIsDuo();
+		if (isDuo)
+			SCENE_MGR.ChangeScene(SCENE_MGR.GetDuoModeScene());
 	}
 
 
