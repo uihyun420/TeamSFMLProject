@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Tree.h"
 
+void Tree::SetTwoPlayMode(const bool& b)
+{
+	isTwoPlayMode = b;
+}
+
 void Tree::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;
@@ -66,22 +71,36 @@ void Tree::Reset()
 		switch (branchesSide[i])
 		{
 		case Sides::Left:
-			branches[i].setScale(-1.f, 1.f);
+			isTwoPlayMode ? branches[i].setScale(-0.7f, 1.f) : branches[i].setScale(-1.f, 1.f);
 			break;
 		case Sides::Right:
-			branches[i].setScale(1.f, 1.f);
+			isTwoPlayMode ? branches[i].setScale(0.7f, 1.f) : branches[i].setScale(1.f, 1.f);
 			break;
 		}
 	}
 	branchesSide[branches.size() - 1] = Sides::None;
 
 	sf::FloatRect windowBounds = FRAMEWORK.GetWindowBounds();
-	SetPosition({ windowBounds.width * 0.5f, 0.f });
+	if(!isTwoPlayMode) SetPosition({ windowBounds.width * 0.5f, 0.f });
 }
 
 void Tree::Update(float dt)
 {
-
+	if (isTwoPlayMode) {
+		tree.setScale(0.7f, 1.f);
+		for (int i = 0; i < branches.size(); ++i)
+		{
+			switch (branchesSide[i])
+			{
+			case Sides::Left:
+				branches[i].setScale(-0.7f, 1.f);
+				break;
+			case Sides::Right:
+				branches[i].setScale(0.7f, 1.f);
+				break;
+			}
+		}
+	}
 }
 
 void Tree::Draw(sf::RenderWindow& window)

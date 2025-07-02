@@ -10,10 +10,13 @@ protected:
 	std::string texIdTree;
 	std::string texIdBranch;
 
+	bool isTwoPlayMode = false;
+
 public:
 	Tree() = default;
 	~Tree() override = default;
 
+	void SetTwoPlayMode(const bool& b);
 	void SetPosition(const sf::Vector2f& pos) override;
 	Sides UpdateBranches();
 
