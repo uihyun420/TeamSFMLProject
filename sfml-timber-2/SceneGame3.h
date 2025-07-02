@@ -15,7 +15,10 @@ protected:
 
 	Tree* tree;
 	UiHud* uiHud;
+	UiHud* uiHud2;
 	MenuUI* menuUI;
+
+	BackgroundElement* beeElement;
 
 	std::vector <BackgroundElement*> Logs;
 
@@ -27,7 +30,10 @@ protected:
 	float timer2 = 0.f;
 	float timerMax = 5.f;
 
-	float playerSpeed = 1000.f;
+	float player1Speed = 1000.f;
+	float player2Speed = 1000.f;
+	float playerInitSpeed = 1000.f;
+	float gravity = 1000.f;
 
 public:
 	SceneGame3();

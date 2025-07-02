@@ -83,14 +83,12 @@ void DuoCharacterSelectScene::Update(float dt)
 		select = (select + ids.size() + 1) % ids.size();
 	}
 
-
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		bool isDuo = SCENE_MGR.GetIsDuo();
 		if (isDuo)
 			SCENE_MGR.ChangeScene(SCENE_MGR.GetDuoModeScene());
 	}
-
 
 	for (std::size_t i = 0; i < ids.size(); ++i)
 	{
