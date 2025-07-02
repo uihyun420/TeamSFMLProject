@@ -27,6 +27,8 @@ void SceneGame3::Init()
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
     texIds.push_back("graphics/player2.png");
+    texIds.push_back("graphics/player3.png");
+    texIds.push_back("graphics/player4.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
     texIds.push_back("graphics/log.png");

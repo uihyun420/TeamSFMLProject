@@ -18,6 +18,7 @@ void SceneDuoChoose::Init()
 {
 	texIds.push_back("graphics/mainbackground.png");
 	texIds.push_back("graphics/duomode.png");
+	texIds.push_back("graphics/challange.png");
 
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
@@ -27,7 +28,7 @@ void SceneDuoChoose::Init()
 
 	classic = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
 	classic->SetOrigin(Origins::MC);
-	challange = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
+	challange = (SpriteGo*)AddGameObject(new SpriteGo("graphics/challange.png"));
 	challange->SetOrigin(Origins::MC);
 
 	menuUI = (MenuUI*)AddGameObject(new MenuUI());
@@ -92,14 +93,12 @@ void SceneDuoChoose::Update(float dt)
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
 		SCENE_MGR.setScene(SceneIds::Player2Mode);
-		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose, true, SceneIds::Player2Mode);
 	}
 	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
 		SCENE_MGR.setScene(SceneIds::ChallangeMode);
-		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose, true, SceneIds::ChallangeMode);
 	}
 }

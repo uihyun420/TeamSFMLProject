@@ -142,9 +142,9 @@ void DuoCharacterSelectScene::Update(float dt)
 	if (select == select2)
 	{
 		go2->SetPosition(go2->GetPosition() + sf::Vector2f({ 0.f, 50.f }));
-		bool isDuo = SCENE_MGR.GetIsDuo();
+		/*bool isDuo = SCENE_MGR.GetIsDuo();
 		if (isDuo)
-			SCENE_MGR.ChangeScene(SCENE_MGR.GetDuoModeScene());
+			SCENE_MGR.ChangeScene(SCENE_MGR.GetDuoModeScene());*/
 	}
 
 
