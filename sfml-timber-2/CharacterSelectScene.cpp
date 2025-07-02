@@ -110,7 +110,7 @@ void CharacterSelectScene::Update(float dt)
 		}
 		else
 		{
-
+			
 			SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
 		}
 	}

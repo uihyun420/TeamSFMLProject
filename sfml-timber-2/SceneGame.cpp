@@ -74,11 +74,6 @@ void SceneGame::Enter()
 
 
 
-    std::string tex1 = SCENE_MGR.GetChosenChar1();
-
-
-
-
 
  
     sf::Vector2f pos = tree->GetPosition();
