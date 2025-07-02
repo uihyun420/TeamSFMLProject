@@ -154,12 +154,15 @@
     <ClCompile Include="SceneDev2.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
+    <ClCompile Include="SceneGame2.cpp" />
+    <ClCompile Include="SceneGame3.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="TreeLog.cpp" />
     <ClCompile Include="UiHud.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,10 +182,13 @@
     <ClInclude Include="SceneDev2.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
+    <ClInclude Include="SceneGame2.h" />
+    <ClInclude Include="SceneGame3.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Tree.h" />
+    <ClInclude Include="TreeLog.h" />
     <ClInclude Include="UiHud.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

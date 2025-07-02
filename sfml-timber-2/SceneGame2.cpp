@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "SceneGame.h"
+#include "SceneGame2.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
 #include "BackgroundElement.h"
@@ -7,19 +7,19 @@
 #include "Player.h"
 #include "UiHud.h"
 
-SceneGame::SceneGame()
-	: Scene(SceneIds::Game)
+SceneGame2::SceneGame2()
+    : Scene(SceneIds::Game)
 {
 }
 
-SceneGame::~SceneGame()
+SceneGame2::~SceneGame2()
 {
 }
 
 
-void SceneGame::Init()
+void SceneGame2::Init()
 {
-    texIds.push_back("graphics/background1.png");
+    texIds.push_back("graphics/background.png");
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
     texIds.push_back("graphics/tree.png");
@@ -33,8 +33,8 @@ void SceneGame::Init()
 
     //
 
-    AddGameObject(new SpriteGo("graphics/background1.png"));
-    
+    AddGameObject(new SpriteGo("graphics/background.png"));
+
     for (int i = 0; i < 3; ++i)
     {
         BackgroundElement* element = (BackgroundElement*)AddGameObject(
@@ -56,19 +56,23 @@ void SceneGame::Init()
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
     player = (Player*)AddGameObject(new Player());
+    player2 = (Player*)AddGameObject(new Player("Player2"));
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
     Scene::Init();
 }
 
-void SceneGame::Enter()
+void SceneGame2::Enter()
 {
     Scene::Enter();
 
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
+    player2->SetPosition(pos);
+    player2->SetSide(Sides::Left);
+
 
     score = 0;
     uiHud->SetScore(score);
@@ -80,12 +84,12 @@ void SceneGame::Enter()
     uiHud->SetMessage("Enter to Start!");
 }
 
-void SceneGame::Exit()
+void SceneGame2::Exit()
 {
     Scene::Exit();
 }
 
-void SceneGame::CreateLog(Player* p)
+void SceneGame2::CreateLog(Player* p)
 {
     BackgroundElement* log = (BackgroundElement*)AddGameObject(
         new BackgroundElement("graphics/log.png"));
@@ -105,65 +109,56 @@ void SceneGame::CreateLog(Player* p)
     Logs.push_back(log);
 }
 
-void SceneGame::Update(float dt)
+void SceneGame2::Update(float dt)
 {
     Scene::Update(dt);
 
     if (isPlaying)
     {
-        
+        bgTime += dt;
+        if (bgTime > 0.3f) {
+            tree->UpdateBranches();
+            bgTime = 0;
+        }
+        if (InputMgr::GetKeyDown(sf::Keyboard::A)) {
+            player2->SetSide(Sides::Left);
+            //tree->UpdateBranches(); 
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::D)) {
+            player2->SetSide(Sides::Right);
+            //tree->UpdateBranches();
+        }
+
         if (InputMgr::GetKeyDown(sf::Keyboard::Left))
         {
-            tree->UpdateBranches();
             player->SetSide(Sides::Left);
-            if (tree->GetSide() == player->GetSide())
-            {
-               FRAMEWORK.SetTimeScale(0.f);
-                player->SetAlive(false);
-
-                uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
-                isPlaying = false;
-            }
-            else
-            {
-                score += 10;
-                uiHud->SetScore(score);
-            }
         }
 
         if (InputMgr::GetKeyDown(sf::Keyboard::Right))
         {
-            tree->UpdateBranches();
             player->SetSide(Sides::Right);
-            if (tree->GetSide() == player->GetSide())
-            {
-                isPlaying = false;
-                FRAMEWORK.SetTimeScale(0.f);
-                player->SetAlive(false);
-
-                uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
-            }
-            else
-            {
-                score += 10;
-                uiHud->SetScore(score);
-            }
         }
 
         player->SetDrawAxe(
             InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
-     
+        player2->SetDrawAxe(
+            InputMgr::GetKey(sf::Keyboard::A) || InputMgr::GetKey(sf::Keyboard::D));
+
         if (!isPlaying) {
             player->SetDrawAxe(false);
+            player2->SetDrawAxe(false);
         }
 
         if (InputMgr::GetKeyDown(sf::Keyboard::Right) || InputMgr::GetKeyDown(sf::Keyboard::Left)) {
             CreateLog(player);
         }
 
-     
+        if (InputMgr::GetKeyDown(sf::Keyboard::A) || InputMgr::GetKeyDown(sf::Keyboard::D)) {
+            CreateLog(player2);
+        }
+
+
+
         timer -= dt;
         if (timer <= 0.f)
         {
@@ -184,6 +179,8 @@ void SceneGame::Update(float dt)
         {
             FRAMEWORK.SetTimeScale(1.f);
             player->Reset();
+            player2->Reset();
+            //player2->SetSide(Sides::Left);
             tree->Reset();
             isPlaying = true;
 
@@ -197,6 +194,6 @@ void SceneGame::Update(float dt)
         }
     }
 
-    
+
 }
 

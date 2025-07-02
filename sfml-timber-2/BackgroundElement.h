@@ -8,6 +8,7 @@ public:
 	{
 		Linear,
 		Wave,
+		Fly,
 	};
 
 protected:
@@ -19,10 +20,16 @@ protected:
 
 	sf::Vector2f startPos;
 
+
 public:
 	BackgroundElement(const std::string& texPlayerId = "", const std::string& name = "");
 
 	float speed = 0.f;
+	float logSpeed = 3000.f;
+
+	sf::Vector2f vel;  
+	bool isFlying = false;
+
 	sf::Vector2f direction;
 
 	float minScale = 0.5f;
@@ -33,6 +40,8 @@ public:
 
 	float minSpeed = 100;
 	float maxSpeed = 200;
+
+	void SetStartPos(sf::Vector2f v);
 
 	void SetSide(Sides side);
 	void SetMoveType(MoveType type);
