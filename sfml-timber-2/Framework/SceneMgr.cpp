@@ -66,6 +66,20 @@ void SceneMgr::ChangeScene(SceneIds id, bool duo, SceneIds duomode)
 	}
 }
 
+void SceneMgr::setTexId(const std::string& s, bool solo , const std::string& duo)
+{
+	if (!solo)
+	{
+		texId = s;
+	}
+	else
+	{
+		texId = s;
+		texId2 = duo;
+		isDuo = true;
+	}
+}
+
 void SceneMgr::Update(float dt)
 {
 	if (nextScene != SceneIds::None)
@@ -83,3 +97,8 @@ void SceneMgr::Draw(sf::RenderWindow& window)
 {
 	scenes[(int)currentScene]->Draw(window);
 }
+
+
+
+
+

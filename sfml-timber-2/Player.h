@@ -25,6 +25,7 @@ public:
 	~Player() override = default;
 	
 	void SetAlive(bool alive);
+	void SetTexIds(std::string t) { texPlayerId = t; };
 	bool GetAlive() const { return isAlive; }
 	void SetDrawAxe(bool draw) { drawAxe = draw; }
 	bool GetDrawAxe() const { return drawAxe; }

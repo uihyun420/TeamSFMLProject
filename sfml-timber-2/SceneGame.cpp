@@ -100,14 +100,10 @@ void SceneGame::Init()
 void SceneGame::Enter()
 {
     Scene::Enter();
-
-
-
-
- 
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
+    
 
     score = 0;
     uiHud->SetScore(score);

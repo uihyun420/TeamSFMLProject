@@ -27,6 +27,9 @@ void SceneGame2::Init()
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
+    texIds.push_back("graphics/player2.png");
+    texIds.push_back("graphics/player3.png");
+    texIds.push_back("graphics/player4.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
     texIds.push_back("graphics/log.png");
@@ -96,7 +99,6 @@ void SceneGame2::Init()
     uiHud->SetLineActive(true);
     uiHud->SetType(UiHud::ModeType::player21);
 
-    
     uiHud2 = (UiHud*)AddGameObject(new UiHud());
     uiHud2->SetType(UiHud::ModeType::player22);
 
@@ -123,7 +125,7 @@ void SceneGame2::Enter()
     sf::Vector2f pos2 = tree2->GetPosition();
     pos2.y = 950.f;
     player2->SetPosition(pos2);
-
+    //player2->SetTexIds(SCENE_MGR.getDuoTexId());
 
     score = 0;
     score2 = 0;
@@ -136,6 +138,8 @@ void SceneGame2::Enter()
 
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
+
+    menuUI->SetActive(false);
 
     menuUI->SetActive(false);
 
@@ -188,6 +192,7 @@ void SceneGame2::Update(float dt)
                 player2->SetAlive(false);
 
                 menuUI->SetActive(true);
+                menuUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
                 isPlaying = false;
@@ -206,6 +211,7 @@ void SceneGame2::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player2->SetAlive(false);
+                menuUI->SetActive(true);
                 menuUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
@@ -227,6 +233,7 @@ void SceneGame2::Update(float dt)
                 player->SetAlive(false);
 
                 menuUI->SetActive(true);
+                menuUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
                 isPlaying = false;
@@ -247,6 +254,7 @@ void SceneGame2::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
+                menuUI->SetActive(true);
                 menuUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
@@ -293,6 +301,7 @@ void SceneGame2::Update(float dt)
             /*uiHud->SetShowMassage(true);
             uiHud->SetMessage("Enter to Restart!");*/
             menuUI->SetActive(true);
+            menuUI->SetActive(true);
         }
         uiHud->SetTimeBar(timer / timerMax);
         uiHud2->SetTimeBar(timer / timerMax);
@@ -334,16 +343,20 @@ void SceneGame2::Update(float dt)
         if (InputMgr::GetKeyDown(sf::Keyboard::Down))
         {
             menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
+            menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
         }
         else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
         {
             menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
+            menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
         }
 
+        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
         if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
         {
             SCENE_MGR.ChangeScene(SceneIds::GameStart);
         }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
         else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
         {
             FRAMEWORK.GetWindow().close();
@@ -369,6 +382,7 @@ void SceneGame2::Update(float dt)
             uiHud->SetShowMassage(false);
             menuUI->SetActive(false);
             uiHud2->SetShowMassage(false);
+            menuUI->SetActive(false);
         }
     }
 

@@ -78,6 +78,24 @@ void Player::Release()
 
 void Player::Reset()
 {
+	std::cout << SCENE_MGR.GetDuo() << std::endl;
+	if(!SCENE_MGR.GetDuo())
+	{
+		texPlayerId = SCENE_MGR.getTexId();
+	}
+	else
+	{
+		if (name != "Player2")
+		{
+			texPlayerId = SCENE_MGR.getTexId();
+		}
+		else
+		{
+			texPlayerId = SCENE_MGR.getDuoTexId();
+			std::cout << 2 << std::endl;
+		}
+	}
+
 	sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
 	Utils::SetOrigin(sprite, Origins::BC);
 
@@ -89,7 +107,7 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
-
+	//texPlayerId = SCENE_MGR.getTexId();
 }
 
 void Player::Draw(sf::RenderWindow& window)
