@@ -20,6 +20,7 @@ protected:
 	MenuUI* menuUI2;
 
 	BackgroundElement* beeElement;
+	BackgroundElement* CrazyE;
 
 	std::vector <BackgroundElement*> Logs;
 

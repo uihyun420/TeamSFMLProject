@@ -65,6 +65,21 @@ void UiHud::Init()
 	textMessage.setFillColor(sf::Color::White);
 	textMessage.setPosition(bounds.width * 0.5f, bounds.height * 0.5f);
 
+	int w = FRAMEWORK.GetWindowSize().x / 2;
+	textWin.setString("WIN!");
+	Utils::SetOrigin(textWin, Origins::MC);
+	textWin.setCharacterSize(100);
+	textWin.setFillColor(sf::Color::White);
+	textWin.setFillColor(sf::Color::White);
+	textWin.setPosition(w / 2.f + 150.f, 20.f);
+
+	textWin2.setString("WIN!");
+	Utils::SetOrigin(textWin2, Origins::MC);
+	textWin2.setCharacterSize(100);
+	textWin2.setFillColor(sf::Color::White);
+	textWin2.setFillColor(sf::Color::White);
+	textWin2.setPosition(w + (w / 2.f) + 150.f, 20.f);
+
 	timeBarSize = { 400.f, 80.f };
 	timeBar.setFillColor(sf::Color::Red);
 	timeBar.setSize(timeBarSize);
@@ -95,6 +110,8 @@ void UiHud::Reset()
 {
 	textScore.setFont(FONT_MGR.Get(fontId));
 	textMessage.setFont(FONT_MGR.Get(fontId));
+	textWin.setFont(FONT_MGR.Get(fontId));
+	textWin2.setFont(FONT_MGR.Get(fontId));
 
 	SetScore(0);
 	isShowMessage = false;
@@ -115,4 +132,12 @@ void UiHud::Draw(sf::RenderWindow& window)
 	}
 	window.draw(timeBar);
 	if(lineActive) window.draw(line);
+	if (isShowWin)
+	{
+		window.draw(textWin);
+	}
+	if (isShowWin2)
+	{
+		window.draw(textWin2);
+	}
 }

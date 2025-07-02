@@ -61,6 +61,8 @@ void SceneGame2::Init()
     element->maxSpeed = 600;
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
+
+
     player = (Player*)AddGameObject(new Player());
     player2 = (Player*)AddGameObject(new Player("Player2"));
 
@@ -214,24 +216,17 @@ void SceneGame2::Update(float dt)
             FRAMEWORK.SetTimeScale(0.f);
         }
 
-        /*bgTime += dt;
-        if (bgTime > 0.3f) {
-            tree->UpdateBranches();
-            bgTime = 0;
-        }*/
-        if (InputMgr::GetKeyDown(sf::Keyboard::A)) {
+        if (InputMgr::GetKeyDown(sf::Keyboard::A) && player2->GetAlive()) {
             tree2->UpdateBranches();
             player2->SetSide(Sides::Left);
             if (tree2->GetSide() == player2->GetSide())
             {
-                FRAMEWORK.SetTimeScale(0.f);
                 player2->SetAlive(false);
-
-                menuUI->SetActive(true);
-                menuUI->SetActive(true);
-                /*uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");*/
-                isPlaying = false;
+                if (!player->GetAlive()) {
+                    FRAMEWORK.SetTimeScale(0.f);
+                    menuUI->SetActive(true);
+                    isPlaying = false;
+                }
             }
             else
             {
@@ -239,17 +234,17 @@ void SceneGame2::Update(float dt)
                 uiHud2->SetScore(score2);
             }
         }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::D)) {
+        else if (InputMgr::GetKeyDown(sf::Keyboard::D) && player2->GetAlive()) {
             tree2->UpdateBranches();
             player2->SetSide(Sides::Right);
             if (tree2->GetSide() == player2->GetSide())
             {
-                isPlaying = false;
-                FRAMEWORK.SetTimeScale(0.f);
                 player2->SetAlive(false);
-                menuUI->SetActive(true);
-                /*uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");*/
+                if (!player->GetAlive()) {
+                    FRAMEWORK.SetTimeScale(0.f);
+                    menuUI->SetActive(true);
+                    isPlaying = false;
+                }
             }
             else
             {
@@ -258,19 +253,18 @@ void SceneGame2::Update(float dt)
             }
         }
 
-        if (InputMgr::GetKeyDown(sf::Keyboard::Left))
+        if (InputMgr::GetKeyDown(sf::Keyboard::Left) && player->GetAlive())
         {
             tree->UpdateBranches();
             player->SetSide(Sides::Left);
             if (tree->GetSide() == player->GetSide())
             {
-                FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-
-                menuUI->SetActive(true);
-                /*uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");*/
-                isPlaying = false;
+                if (!player2->GetAlive()) {
+                    FRAMEWORK.SetTimeScale(0.f);
+                    menuUI->SetActive(true);
+                    isPlaying = false;
+                }
             }
             else
             {
@@ -279,18 +273,18 @@ void SceneGame2::Update(float dt)
             }
         }
 
-        if (InputMgr::GetKeyDown(sf::Keyboard::Right))
+        if (InputMgr::GetKeyDown(sf::Keyboard::Right) && player->GetAlive())
         {
             tree->UpdateBranches();
             player->SetSide(Sides::Right);
             if (tree->GetSide() == player->GetSide())
             {
-                isPlaying = false;
-                FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-                menuUI->SetActive(true);
-                /*uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");*/
+                if (!player2->GetAlive()) {
+                    FRAMEWORK.SetTimeScale(0.f);
+                    menuUI->SetActive(true);
+                    isPlaying = false;
+                }
             }
             else
             {
@@ -299,10 +293,14 @@ void SceneGame2::Update(float dt)
             }
         }
 
-        player->SetDrawAxe(
-            InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
-        player2->SetDrawAxe(
-            InputMgr::GetKey(sf::Keyboard::A) || InputMgr::GetKey(sf::Keyboard::D));
+        if (player->GetAlive()) {
+            player->SetDrawAxe(
+                InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
+        }
+        if (player2->GetAlive()) {
+            player2->SetDrawAxe(
+                InputMgr::GetKey(sf::Keyboard::A) || InputMgr::GetKey(sf::Keyboard::D));
+        }
 
         if (!isPlaying) {
             player->SetDrawAxe(false);
@@ -310,20 +308,22 @@ void SceneGame2::Update(float dt)
         }
 
         if (InputMgr::GetKeyDown(sf::Keyboard::Right) || InputMgr::GetKeyDown(sf::Keyboard::Left)) {
-            CreateLog(player);
+            if (player->GetAlive()) CreateLog(player);
         }
 
         if (InputMgr::GetKeyDown(sf::Keyboard::A) || InputMgr::GetKeyDown(sf::Keyboard::D)) {
-            CreateLog(player2);
+            if (player2->GetAlive()) CreateLog(player2);
         }
 
 
 
-        timer -= dt;
+        if(player->GetAlive()) timer -= dt;
+        if(player2->GetAlive())timer2 -= dt;
 
-        if (timer <= 0.f)
+        if (timer <= 0.f || timer2 <= 0.f)
         {
             timer = 0.f;
+            timer2 = 0.f;
 
             isPlaying = false;
             FRAMEWORK.SetTimeScale(0.f);
@@ -331,14 +331,16 @@ void SceneGame2::Update(float dt)
             player2->SetAlive(false);
 
             menuUI->SetActive(true);
-            /*uiHud->SetShowMassage(true);
-            uiHud->SetMessage("Enter to Restart!");*/
         }
         uiHud->SetTimeBar(timer / timerMax);
-        uiHud2->SetTimeBar(timer / timerMax);
+        uiHud2->SetTimeBar(timer2 / timerMax);
     }
     else
     {
+        if (score > 0 || score2 > 0) {
+            if(score > score2) uiHud->SetShowWin(true);
+            if(score < score2) uiHud->SetShowWin2(true);
+        }
         if (!player->GetAlive() || !player2->GetAlive())
         {
             for (auto log : Logs)
@@ -370,6 +372,8 @@ void SceneGame2::Update(float dt)
                 FRAMEWORK.SetTimeScale(1.f);
                 player->Reset();
                 player2->Reset();
+                player->SetAlive(true);
+                player2->SetAlive(true);
                 tree->Reset();
                 tree2->Reset();
                 isPlaying = true;
@@ -380,12 +384,16 @@ void SceneGame2::Update(float dt)
                 uiHud2->SetScore(score2);
 
                 timer = timerMax;
+                timer2 = timerMax;
                 uiHud->SetTimeBar(timer / timerMax);
-                uiHud2->SetTimeBar(timer / timerMax);
+                uiHud2->SetTimeBar(timer2 / timerMax);
 
                 uiHud->SetShowMassage(false);
                 menuUI->SetActive(false);
                 uiHud2->SetShowMassage(false);
+
+                uiHud->SetShowWin(false);
+                uiHud->SetShowWin2(false);
             }
         }
         else
@@ -418,8 +426,9 @@ void SceneGame2::Update(float dt)
                 uiHud2->SetScore(score2);
 
                 timer = timerMax;
+                timer2 = timerMax;
                 uiHud->SetTimeBar(timer / timerMax);
-                uiHud2->SetTimeBar(timer / timerMax);
+                uiHud2->SetTimeBar(timer2 / timerMax);
 
                 uiHud->SetShowMassage(false);
                 uiHud2->SetShowMassage(false);

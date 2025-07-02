@@ -9,6 +9,7 @@ public:
 		Linear,
 		Wave,
 		Fly,
+		Crazy,
 	};
 
 protected:

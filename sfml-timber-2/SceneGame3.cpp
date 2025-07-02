@@ -55,6 +55,16 @@ void SceneGame3::Init()
     beeElement->maxSpeed = 600;
     beeElement->SetMoveType(BackgroundElement::MoveType::Wave);
 
+    CrazyE = (BackgroundElement*)AddGameObject(
+        new BackgroundElement("graphics/player.png"));
+    CrazyE->minScale = 1.f;
+    CrazyE->maxScale = 1.f;
+    CrazyE->minY = 600;
+    CrazyE->maxY = 800;
+    CrazyE->minSpeed = 400;
+    CrazyE->maxSpeed = 600;
+    CrazyE->SetMoveType(BackgroundElement::MoveType::Crazy);
+
     player = (Player*)AddGameObject(new Player());
     player2 = (Player*)AddGameObject(new Player("Player2"));
 
@@ -269,6 +279,17 @@ void SceneGame3::Update(float dt)
             player->SetAlive(false);
         }
         if (!Utils::getDistanceWithSize(player2->GetSprite(), beeElement->GetSprite()))
+        {
+            player2Speed = 0.f;
+            player2->SetAlive(false);
+        }
+
+        if (!Utils::getDistanceWithSize(player->GetSprite(), CrazyE->GetSprite()))
+        {
+            player1Speed = 0.f;
+            player->SetAlive(false);
+        }
+        if (!Utils::getDistanceWithSize(player2->GetSprite(), CrazyE->GetSprite()))
         {
             player2Speed = 0.f;
             player2->SetAlive(false);

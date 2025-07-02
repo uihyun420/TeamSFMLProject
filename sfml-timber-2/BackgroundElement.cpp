@@ -24,12 +24,14 @@ void BackgroundElement::SetSide(Sides side)
 	case Sides::Left:
 		direction = { 1.f, 0.f };
 		SetScale({ -scale, scale });
-		SetPosition({ -150.f, y });
+		if(moveType == MoveType::Crazy) SetPosition({ 0.f, y });
+		else SetPosition({ -150.f, y });
 		break;
 	case Sides::Right:
 		direction = { -1.f, 0.f };
 		SetScale({ scale, scale });
-		SetPosition({ bounds.width + 150.f, y });
+		if (moveType == MoveType::Crazy) SetPosition({ bounds.width, y });
+		else SetPosition({ bounds.width + 150.f, y });
 		break;
 	}
 	speed = Utils::RandomRange(minSpeed, maxSpeed);
@@ -81,6 +83,14 @@ void BackgroundElement::Update(float dt)
 			sf::Vector2f gravity(0.f, 4000.f);
 			vel += gravity * dt;
 			pos += vel * dt;
+		}
+		break;
+	case MoveType::Crazy:
+		pos.x += direction.x * (float)(rand() % 400 + 300) * dt;
+		pos.y += direction.y * (float)(rand() % 400 + 300) * dt;
+		if (rand() % 100 < 1) {
+			direction.x = ((rand() % 2001) - 1000) / 1000.f;
+			direction.y = ((rand() % 2001) - 1000) / 1000.f;
 		}
 		break;
 	}
