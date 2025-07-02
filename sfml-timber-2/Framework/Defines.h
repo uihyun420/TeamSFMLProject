@@ -32,3 +32,10 @@ enum class Sides
 	Right,
 	None,
 };
+
+enum class Menu
+{
+	home,
+	restart,
+	exit
+};

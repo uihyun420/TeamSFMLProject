@@ -6,7 +6,7 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
-#include "GameOverUI.h"
+#include "MenuUI.h"
 
 SceneGame::SceneGame()
 	: Scene(SceneIds::Player1Mode)
@@ -58,7 +58,36 @@ void SceneGame::Init()
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
-    overUI = (GameOverUI*)AddGameObject(new GameOverUI());
+    menuUI = (MenuUI*)AddGameObject(new MenuUI());
+
+    menuUI->SetFontId("fonts/Galmuri11-Bold.ttf");
+
+    sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+    menuUI->AddTextPos({ bounds.width * 0.5f, 350 });
+    menuUI->AddTextPos({ bounds.width * 0.5f, 550 });
+    menuUI->AddTextPos({ bounds.width * 0.5f, 750 });
+
+    menuUI->AddMessages("Go to main!");
+    menuUI->AddMessages("Game Restart!");
+    menuUI->AddMessages("Exit Game");
+
+    for (int i = 0; i < menuUI->GetMenuCount(); i++)
+    {
+        TextGo text;
+        text.SetCharacterSize(100);
+        text.SetFillColor(sf::Color::White);
+        text.SetPosition(menuUI->GetTextPos()[i]);
+        text.SetOrigin(Origins::MC);
+        menuUI->AddTextGo(text);
+    }
+
+    menuUI->SetChooseBarColor(sf::Color(0, 0, 0, 0));
+    menuUI->SetChooseBarOutColor(sf::Color::Yellow);
+    menuUI->SetChooseBarThickness(5.f);
+    menuUI->SetChooseBarSize({ 800.f, 130.f });
+    menuUI->SetChoosedColor(sf::Color::Yellow);
+    menuUI->SetNotChoosedColor(sf::Color::White);
+    menuUI->SetChooseBarPos(1);
 
     Scene::Init();
 }
@@ -80,7 +109,7 @@ void SceneGame::Enter()
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
 
-    overUI->SetActive(false);
+    menuUI->SetActive(false);
 
     isPlaying = false;
 }
@@ -126,7 +155,7 @@ void SceneGame::Update(float dt)
                FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
 
-                overUI->SetActive(true);
+                menuUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
                 isPlaying = false;
@@ -147,7 +176,7 @@ void SceneGame::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-                overUI->SetActive(true);
+                menuUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
             }
@@ -179,7 +208,7 @@ void SceneGame::Update(float dt)
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
 
-            overUI->SetActive(true);
+            menuUI->SetActive(true);
             /*uiHud->SetShowMassage(true);
             uiHud->SetMessage("Enter to Restart!");*/
         }
@@ -196,18 +225,18 @@ void SceneGame::Update(float dt)
         }
         if (InputMgr::GetKeyDown(sf::Keyboard::Down))
         {
-            overUI->SetBarPos((overUI->GetBarPos() + 1) % overUI->GetMenuCount());
+            menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
         }
         else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
         {
-            overUI->SetBarPos((overUI->GetBarPos() + 2) % overUI->GetMenuCount());
+            menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
         }
 
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos() == (int)Menu::home)
+        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
         {
             SCENE_MGR.ChangeScene(SceneIds::GameStart);
         }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos() == (int)Menu::exit)
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
         {
             FRAMEWORK.GetWindow().close();
         }
@@ -225,7 +254,7 @@ void SceneGame::Update(float dt)
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);
-            overUI->SetActive(false);
+            menuUI->SetActive(false);
         }
         
     }

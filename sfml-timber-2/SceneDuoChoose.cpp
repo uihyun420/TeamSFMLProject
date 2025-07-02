@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SceneDuoChoose.h"
 #include "SpriteGo.h"
-#include "GameModeUI.h"
+#include "MenuUI.h"
 
 SceneDuoChoose::SceneDuoChoose()
 	:Scene(SceneIds::DuoMode)
@@ -19,6 +19,8 @@ void SceneDuoChoose::Init()
 
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+
 	AddGameObject(new SpriteGo("graphics/mainbackground.png"));
 
 	classic = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
@@ -26,9 +28,33 @@ void SceneDuoChoose::Init()
 	challange = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
 	challange->SetOrigin(Origins::MC);
 
-	gameModeUI = (GameModeUI*)AddGameObject(new GameModeUI());
-	gameModeUI->SetChooseBarSize({ 700.f,130.f });
-	gameModeUI->SetTextMessages({"Classic","Challange"});
+	menuUI = (MenuUI*)AddGameObject(new MenuUI());
+
+	menuUI->SetFontId("fonts/Galmuri11-Bold.ttf");
+
+	menuUI->AddMessages("Classic");
+	menuUI->AddMessages("Challange");
+
+	menuUI->AddTextPos({ bounds.width * 0.5f - 450.f, 800.f });
+	menuUI->AddTextPos({ bounds.width * 0.5f + 450.f, 800.f });
+
+	for (int i = 0; i < menuUI->GetMenuCount(); i++)
+	{
+		TextGo text;
+		text.SetCharacterSize(100);
+		text.SetFillColor(sf::Color::White);
+		text.SetPosition(menuUI->GetTextPos()[i]);
+		text.SetOrigin(Origins::MC);
+		menuUI->AddTextGo(text);
+	}
+
+	menuUI->SetChooseBarColor(sf::Color(0, 0, 0, 0));
+	menuUI->SetChooseBarOutColor(sf::Color::Yellow);
+	menuUI->SetChooseBarThickness(5.f);
+	menuUI->SetChooseBarSize({ 700.f, 130.f });
+	menuUI->SetChoosedColor(sf::Color::Yellow);
+	menuUI->SetNotChoosedColor(sf::Color::White);
+	menuUI->SetChooseBarOffset(sf::Vector2f{ 0.f, 15.f });
 
 	Scene::Init();
 }
@@ -57,15 +83,15 @@ void SceneDuoChoose::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Left) || InputMgr::GetKeyDown(sf::Keyboard::Right))
 	{
-		gameModeUI->SetBarPos((gameModeUI->GetBarPos() + 1) % gameModeUI->GetMenuCount());
+		menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !gameModeUI->GetBarPos())
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 	}
-	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && gameModeUI->GetBarPos())
+	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);

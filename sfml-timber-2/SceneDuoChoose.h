@@ -1,13 +1,13 @@
 #pragma once
 #include "Scene.h"
 
-class GameModeUI;
+class MenuUI;
 class SpriteGo;
 
 class SceneDuoChoose : public Scene
 {
 protected:
-	GameModeUI* gameModeUI;
+	MenuUI* menuUI;
 
 	SpriteGo* classic;
 	SpriteGo* challange;

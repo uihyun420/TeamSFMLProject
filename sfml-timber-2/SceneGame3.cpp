@@ -6,6 +6,7 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
+#include "MenuUI.h"
 
 SceneGame3::SceneGame3()
     : Scene(SceneIds::ChallangeMode)
@@ -60,6 +61,37 @@ void SceneGame3::Init()
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
+    menuUI = (MenuUI*)AddGameObject(new MenuUI());
+
+    menuUI->SetFontId("fonts/Galmuri11-Bold.ttf");
+
+    sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+    menuUI->AddTextPos({ bounds.width * 0.5f, 350 });
+    menuUI->AddTextPos({ bounds.width * 0.5f, 550 });
+    menuUI->AddTextPos({ bounds.width * 0.5f, 750 });
+
+    menuUI->AddMessages("Go to main!");
+    menuUI->AddMessages("Game Restart!");
+    menuUI->AddMessages("Exit Game");
+
+    for (int i = 0; i < menuUI->GetMenuCount(); i++)
+    {
+        TextGo text;
+        text.SetCharacterSize(100);
+        text.SetFillColor(sf::Color::White);
+        text.SetPosition(menuUI->GetTextPos()[i]);
+        text.SetOrigin(Origins::MC);
+        menuUI->AddTextGo(text);
+    }
+
+    menuUI->SetChooseBarColor(sf::Color(0, 0, 0, 0));
+    menuUI->SetChooseBarOutColor(sf::Color::Yellow);
+    menuUI->SetChooseBarThickness(5.f);
+    menuUI->SetChooseBarSize({ 800.f, 130.f });
+    menuUI->SetChoosedColor(sf::Color::Yellow);
+    menuUI->SetNotChoosedColor(sf::Color::White);
+    menuUI->SetChooseBarPos(1);
+
     Scene::Init();
 }
 
@@ -82,6 +114,8 @@ void SceneGame3::Enter()
 
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
+
+    menuUI->SetActive(false);
 }
 
 void SceneGame3::Exit()
@@ -168,14 +202,39 @@ void SceneGame3::Update(float dt)
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
 
-            uiHud->SetShowMassage(true);
-            uiHud->SetMessage("Enter to Restart!");
+            menuUI->SetActive(true);
+            /*uiHud->SetShowMassage(true);
+            uiHud->SetMessage("Enter to Restart!");*/
         }
         uiHud->SetTimeBar(timer / timerMax);
     }
     else
     {
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+        if (!player->GetAlive())
+        {
+            for (auto log : Logs)
+            {
+                log->SetActive(false);
+            }
+        }
+        if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+        {
+            menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+        {
+            menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
+        }
+
+        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
+        {
+            SCENE_MGR.ChangeScene(SceneIds::GameStart);
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
+        {
+            FRAMEWORK.GetWindow().close();
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {
             FRAMEWORK.SetTimeScale(1.f);
             player->Reset();
@@ -191,6 +250,7 @@ void SceneGame3::Update(float dt)
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);
+            menuUI->SetActive(false);
         }
     }
 

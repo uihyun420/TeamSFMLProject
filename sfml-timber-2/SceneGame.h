@@ -4,13 +4,13 @@
 class Player;
 class Tree;
 class UiHud;
-class GameOverUI;
+class MenuUI;
 class BackgroundElement;
 
 class SceneGame : public Scene
 {
 protected:
-	GameOverUI* overUI = nullptr;
+	MenuUI* menuUI = nullptr;
 	Player* player = nullptr;
 
 	Tree* tree = nullptr;
@@ -22,13 +22,6 @@ protected:
 	int score = 0;
 	float timer = 0.f;
 	float timerMax = 5.f;
-
-	enum class Menu
-	{
-		home,
-		restart,
-		exit
-	};
 
 public:
 	SceneGame();

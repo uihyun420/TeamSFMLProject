@@ -5,6 +5,7 @@ class Player;
 class Tree;
 class UiHud;
 class BackgroundElement;
+class MenuUI;
 
 class SceneGame3 : public Scene
 {
@@ -14,6 +15,7 @@ protected:
 
 	Tree* tree;
 	UiHud* uiHud;
+	MenuUI* menuUI;
 
 	std::vector <BackgroundElement*> Logs;
 

@@ -1,12 +1,12 @@
 #pragma once
 #include "Scene.h"
 
-class GameStartUI;
+class MenuUI;
 
 class SceneStart :public Scene
 {
 protected:
-	GameStartUI* startUI;
+	MenuUI* menuUI;
 
 public:
 	SceneStart();

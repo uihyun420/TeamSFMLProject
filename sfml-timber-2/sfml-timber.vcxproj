@@ -146,10 +146,7 @@
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
-    <ClCompile Include="GameModeUI.cpp" />
-    <ClCompile Include="GameOverUI.cpp" />
-    <ClCompile Include="GameStartUI.cpp" />
-    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="Framework\MenuUI.cpp" />
     <ClCompile Include="SceneDev3.cpp" />
     <ClCompile Include="SceneDuoChoose.cpp" />
     <ClCompile Include="SceneGame2.cpp" />
@@ -184,10 +181,7 @@
     <ClInclude Include="Framework\Singleton.h" />
     <ClInclude Include="Framework\SpriteGo.h" />
     <ClInclude Include="Framework\Scene.h" />
-    <ClInclude Include="GameModeUI.h" />
-    <ClInclude Include="GameOverUI.h" />
-    <ClInclude Include="GameStartUI.h" />
-    <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="Framework\MenuUI.h" />
     <ClInclude Include="SceneDev3.h" />
     <ClInclude Include="SceneDuoChoose.h" />
     <ClInclude Include="SceneGame2.h" />

@@ -2,7 +2,7 @@
 #include "SceneStart.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
-#include "GameStartUI.h"
+#include "MenuUI.h"
 
 SceneStart::SceneStart()
 	: Scene(SceneIds::GameStart)
@@ -19,6 +19,8 @@ void SceneStart::Init()
 
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+
 	AddGameObject(new SpriteGo("graphics/mainbackground.png"));
 
 	TextGo* go = new TextGo("fonts/Galmuri11-Bold.ttf");
@@ -26,10 +28,35 @@ void SceneStart::Init()
 	go->SetCharacterSize(150);
 	go->SetFillColor(sf::Color::White);
 	go->SetOrigin(Origins::MC);
-	go->SetPosition({ FRAMEWORK.GetWindowBounds().width / 2.f, FRAMEWORK.GetWindowBounds().height / 2.f - 300.f });
+	go->SetPosition({ bounds.width / 2.f, bounds.height / 2.f - 300.f });
 	AddGameObject(go);
 
-	startUI = (GameStartUI*)AddGameObject(new GameStartUI());
+	menuUI = (MenuUI*)AddGameObject(new MenuUI());
+
+	menuUI->SetFontId("fonts/Galmuri11-Bold.ttf");
+
+	menuUI->AddMessages("Game Start!"); 
+	menuUI->AddMessages("Exit Game!");
+
+	menuUI->AddTextPos({ bounds.width * 0.5f, 550 });
+	menuUI->AddTextPos({ bounds.width * 0.5f, 750 });
+
+	for (int i = 0; i < menuUI->GetMenuCount(); i++)
+	{
+		TextGo text;
+		text.SetCharacterSize(100);
+		text.SetFillColor(sf::Color::White);
+		text.SetPosition(menuUI->GetTextPos()[i]);
+		text.SetOrigin(Origins::MC);
+		menuUI->AddTextGo(text);
+	}
+	
+	menuUI->SetChooseBarColor(sf::Color(0, 0, 0, 0));
+	menuUI->SetChooseBarOutColor(sf::Color::Yellow);
+	menuUI->SetChooseBarThickness(5.f);
+	menuUI->SetChooseBarSize({ 700.f, 130.f });
+	menuUI->SetChoosedColor(sf::Color::Yellow);
+	menuUI->SetNotChoosedColor(sf::Color::White);
 
 	Scene::Init();
 }
@@ -37,16 +64,6 @@ void SceneStart::Init()
 void SceneStart::Enter()
 {
 	Scene::Enter();
-
-	/*player->SetPosition({ 100.f, 1000.f });
-	player->SetScale({ -5.f, 5.f });
-	sf::Vector2f treePos = tree[0]->GetPosition();
-	sf::Vector2f offset = { 150.f,0.f };
-	for (int i = 0; i < 3; i++)
-	{
-		tree[i]->SetPosition(treePos);
-		treePos.x += 350.f;
-	}*/
 }
 
 void SceneStart::Exit()
@@ -60,14 +77,14 @@ void SceneStart::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Down) || InputMgr::GetKeyDown(sf::Keyboard::Up))
 	{
-		startUI->SetBarPos((startUI->GetBarPos() + 1) % startUI->GetMenuCount());
+		menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
 	}
 
-	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !startUI->GetBarPos())
+	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !menuUI->GetBarPos())
 	{
 		SCENE_MGR.ChangeScene(SceneIds::GameMode);
 	}
-	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && startUI->GetBarPos())
+	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos())
 	{
 		FRAMEWORK.GetWindow().close();
 	}
