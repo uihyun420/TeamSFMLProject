@@ -69,25 +69,13 @@
     <ClCompile Include="SceneStart.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameStartUI.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="SceneGMChoose.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameModeUI.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SceneDev3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="SceneDuoChoose.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CharacterInfo.cpp">
@@ -103,6 +91,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="DuoCharacterSelectScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\MenuUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,25 +158,13 @@
     <ClInclude Include="SceneStart.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameStartUI.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="SceneGMChoose.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameModeUI.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverUI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SceneDev3.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SceneDuoChoose.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuUI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CharacterInfo.h">
@@ -201,6 +180,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="DuoCharacterSelectScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\MenuUI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,6 +4,8 @@
 #include "TextGo.h"
 #include "MenuUI.h"
 
+
+
 SceneStart::SceneStart()
 	: Scene(SceneIds::GameStart)
 {
@@ -11,10 +13,17 @@ SceneStart::SceneStart()
 
 SceneStart::~SceneStart()
 {
+
 }
 
 void SceneStart::Init()
 {
+	bgm.openFromFile("sound/BGM_01.wav");
+	
+	bgm.setLoop(true);
+	bgm.play();
+	
+
 	texIds.push_back("graphics/mainbackground.png");
 
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
