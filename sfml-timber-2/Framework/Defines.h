@@ -37,5 +37,6 @@ enum class Menu
 {
 	home,
 	restart,
-	exit
+	exit,
+	resume
 };

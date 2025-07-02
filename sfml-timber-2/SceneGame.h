@@ -11,6 +11,7 @@ class SceneGame : public Scene
 {
 protected:
 	MenuUI* menuUI = nullptr;
+	MenuUI* menuUI2 = nullptr;
 	Player* player = nullptr;
 
 	Tree* tree = nullptr;
