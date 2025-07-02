@@ -90,6 +90,21 @@
     <ClCompile Include="MenuUI.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterInfo.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSelectScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DuoCharacterSelectScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\InputMgr.h">
@@ -171,6 +186,21 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="MenuUI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterInfo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSelectScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGame2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGame3.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DuoCharacterSelectScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

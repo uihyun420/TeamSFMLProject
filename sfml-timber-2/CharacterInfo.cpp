@@ -21,11 +21,7 @@ void CharacterInfo::Init()
 
 }
 
-void CharacterInfo::Draw(sf::RenderWindow& window)
-{
-    for (auto& player : player)
-        window.draw(player);
-}
+
 
 void CharacterInfo::Release()
 {
@@ -45,4 +41,22 @@ void CharacterInfo::Reset()
 void CharacterInfo::Update(float dt)
 {
     // 선택 상태를 관리하려면 여기에 로직 추가
+}
+
+void CharacterInfo::SetIconColor(std::size_t idx, const sf::Color& color)
+{
+    if (idx < player.size())
+        player[idx].setColor(color);
+}
+
+void CharacterInfo::SetIconScale(std::size_t idx, const sf::Vector2f& scale)
+{
+    if (idx < player.size())
+        player[idx].setScale(scale);
+}
+
+void CharacterInfo::Draw(sf::RenderWindow& window)
+{
+    for (auto& player : player)
+        window.draw(player);
 }

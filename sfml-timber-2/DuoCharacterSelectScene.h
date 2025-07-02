@@ -1,15 +1,15 @@
 #pragma once
 #include "Scene.h"
-#include "TextGo.h"
 #include "CharacterInfo.h"
-#include "GameModeUI.h"
+#include "BackgroundElement.h"
+#include "TextGo.h"
 
-class CharacterSelectScene :
+class DuoCharacterSelectScene :
     public Scene
 {
 protected:
 
-    enum class Choice {Choice01, Choice02};
+    enum class Choice { Choice01, Choice02 };
     Choice phase = Choice::Choice01;
     int selectedP1 = 0;
     int selectedP2 = 0;
@@ -22,14 +22,8 @@ protected:
     int selectedIndex = 0;
 
 public:
-
-    CharacterSelectScene();
-
-  const std::string& GetselectedP1();
-  const std::string& GetselectedP2();
-    
+    DuoCharacterSelectScene();
 
     void Init() override;
     void Update(float dt) override;
 };
-

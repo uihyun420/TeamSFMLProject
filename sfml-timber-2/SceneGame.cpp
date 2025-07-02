@@ -6,6 +6,10 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
+#include "GameOverUI.h"
+#include "CharacterSelectScene.h"
+#include "DuoCharacterSelectScene.h"
+
 #include "MenuUI.h"
 
 SceneGame::SceneGame()
@@ -20,12 +24,14 @@ SceneGame::~SceneGame()
 
 void SceneGame::Init()
 {
+
     texIds.push_back("graphics/background1.png");
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
+    texIds.push_back("graphics/player2.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
     texIds.push_back("graphics/log.png");
@@ -96,6 +102,10 @@ void SceneGame::Enter()
 {
     Scene::Enter();
 
+
+
+
+ 
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);

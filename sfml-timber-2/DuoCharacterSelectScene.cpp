@@ -1,32 +1,14 @@
 #include "stdafx.h"
-#include "CharacterSelectScene.h"
+#include "DuoCharacterSelectScene.h"
 #include "CharacterInfo.h"
 #include "BackgroundElement.h"
 
-
-
-
-CharacterSelectScene::CharacterSelectScene()
-	:Scene(SceneIds::SoloCharacterChoose)
+DuoCharacterSelectScene::DuoCharacterSelectScene()
+	:Scene(SceneIds::DuoCharacterChoose)
 {
 }
 
-
-
-
-const std::string& CharacterSelectScene::GetselectedP1()
-{
-	return ids[selectedP1];
-}
-
-const std::string& CharacterSelectScene::GetselectedP2()
-{
-	return ids[selectedP2];
-}
-
-
-
-void CharacterSelectScene::Init()
+void DuoCharacterSelectScene::Init()
 {
 	texIds.push_back("graphics/mainbackground.png");
 
@@ -87,7 +69,7 @@ void CharacterSelectScene::Init()
 
 
 
-void CharacterSelectScene::Update(float dt)
+void DuoCharacterSelectScene::Update(float dt)
 {
 	int& select = (phase == Choice::Choice01 ? selectedP1 : selectedP2);
 
@@ -105,14 +87,9 @@ void CharacterSelectScene::Update(float dt)
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		if (phase == Choice::Choice01)
-		{
 			phase = Choice::Choice02;
-		}
 		else
-		{
-			
 			SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
-		}
 	}
 
 
@@ -124,8 +101,5 @@ void CharacterSelectScene::Update(float dt)
 		info->SetIconScale(i, isActive ? sf::Vector2f{ 1.3f,1.3f } : sf::Vector2f{ 1.f,1.f }); // 선택된 것은 130%의 크기로
 
 	}
-
-
-
 
 }

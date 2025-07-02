@@ -10,6 +10,8 @@
 #include "SceneGMChoose.h"
 #include "SceneDuoChoose.h"
 #include "CharacterSelectScene.h"
+#include "DuoCharacterSelectScene.h"
+
 
 void SceneMgr::Init()
 {
@@ -23,6 +25,9 @@ void SceneMgr::Init()
 	scenes.push_back(new SceneGame3());
 	//scenes.push_back(new SceneSingleChoose());
 	scenes.push_back(new CharacterSelectScene());
+	scenes.push_back(new DuoCharacterSelectScene());
+	
+
 	//scenes.push_back(new SceneDuoChoose());
 	scenes.push_back(new SceneDev2());
 	scenes.push_back(new SceneDev1());
@@ -72,4 +77,30 @@ void SceneMgr::Update(float dt)
 void SceneMgr::Draw(sf::RenderWindow& window)
 {
 	scenes[(int)currentScene]->Draw(window);
+}
+
+
+
+
+
+
+
+void SceneMgr::SetChosenChar1(const std::string& s)
+{
+	chosenChar1 = s;
+}
+
+void SceneMgr::SetChosenChar2(const std::string& s)
+{
+	chosenChar2 = s;
+}
+
+const std::string& SceneMgr::GetChosenChar1()
+{
+	return chosenChar1;
+}
+
+const std::string& SceneMgr::GetChosenChar2()
+{
+	return chosenChar2;
 }

@@ -14,6 +14,10 @@ public:
     ~CharacterInfo() = default;
 
 
+    void SetIconColor(std::size_t idx, const sf::Color& color);
+    void SetIconScale(std::size_t idx, const sf::Vector2f& scale);
+
+
     void Init() override;
     void Release() override;
     void Reset() override;
