@@ -8,7 +8,7 @@ protected:
 	
 	sf::RectangleShape chooseBar;
 
-	sf::Vector2f chooseBarSize = { 800.f, 100.f };
+	sf::Vector2f chooseBarSize = { 800.f, 130.f };
 	std::vector<sf::Vector2f> textPos;
 	std::vector<std::string> textMessages = { "Go to main!", "Game Restart!", "Exit Game" };
 

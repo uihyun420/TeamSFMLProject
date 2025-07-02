@@ -7,7 +7,7 @@ protected:
 	TextGo texts[2];
 	sf::RectangleShape chooseBar;
 
-	sf::Vector2f chooseBarSize = { 500.f, 100.f };
+	sf::Vector2f chooseBarSize = { 500.f, 130.f };
 	std::vector<sf::Vector2f> textPos;
 	std::vector<std::string> textMessages = { "1 Player","2 Player" };
 
@@ -24,6 +24,8 @@ public:
 	int GetBarPos() const { return chooseBarPos; }
 
 	int GetMenuCount() const { return menuCount; }
+	void SetTextMessages(std::vector<std::string> messages);
+	void SetChooseBarSize(const sf::Vector2f& size) { chooseBarSize = size; };
 
 	// GameObject을(를) 통해 상속됨
 	void Init() override;

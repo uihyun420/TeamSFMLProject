@@ -148,6 +148,7 @@
     <ClCompile Include="GameOverUI.cpp" />
     <ClCompile Include="GameStartUI.cpp" />
     <ClCompile Include="SceneDev3.cpp" />
+    <ClCompile Include="SceneDuoChoose.cpp" />
     <ClCompile Include="SceneGMChoose.cpp" />
     <ClCompile Include="SceneStart.cpp" />
     <ClCompile Include="main.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="GameOverUI.h" />
     <ClInclude Include="GameStartUI.h" />
     <ClInclude Include="SceneDev3.h" />
+    <ClInclude Include="SceneDuoChoose.h" />
     <ClInclude Include="SceneGMChoose.h" />
     <ClInclude Include="SceneStart.h" />
     <ClInclude Include="Player.h" />

@@ -4,17 +4,17 @@
 class GameModeUI;
 class SpriteGo;
 
-class SceneGMChoose : public Scene
+class SceneDuoChoose : public Scene
 {
 protected:
 	GameModeUI* gameModeUI;
 
-	SpriteGo* solo;
-	SpriteGo* duo;
+	SpriteGo* classic;
+	SpriteGo* challange;
 
 public:
-	SceneGMChoose();
-	~SceneGMChoose() override;
+	SceneDuoChoose();
+	~SceneDuoChoose() override;
 
 	void Init() override;
 	void Enter() override;

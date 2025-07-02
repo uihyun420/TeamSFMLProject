@@ -9,9 +9,9 @@ SceneDev3::SceneDev3()
 
 void SceneDev3::Init()
 {
-	fontIds.push_back("fonts/KOMIKAP_.ttf");
+	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
-	TextGo* go = new TextGo("fonts/KOMIKAP_.ttf");
+	TextGo* go = new TextGo("fonts/Galmuri11-Bold.ttf");
 	go->SetString("Duo player Mode");
 	go->SetCharacterSize(30);
 	go->SetFillColor(sf::Color::White);

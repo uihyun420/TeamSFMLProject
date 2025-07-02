@@ -26,7 +26,7 @@ void UiHud::SetTimeBar(float value)
 
 void UiHud::Init()
 {
-	fontId = "fonts/KOMIKAP_.ttf";
+	fontId = "fonts/Galmuri11-Bold.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 

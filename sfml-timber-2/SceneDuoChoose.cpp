@@ -1,58 +1,57 @@
 #include "stdafx.h"
-#include "SceneGMChoose.h"
+#include "SceneDuoChoose.h"
 #include "SpriteGo.h"
-#include "Tree.h"
-#include "Player.h"
 #include "GameModeUI.h"
 
-SceneGMChoose::SceneGMChoose()
-	:Scene(SceneIds::GameMode)
+SceneDuoChoose::SceneDuoChoose()
+	:Scene(SceneIds::DuoMode)
 {
 }
 
-SceneGMChoose::~SceneGMChoose()
+SceneDuoChoose::~SceneDuoChoose()
 {
 }
 
-void SceneGMChoose::Init()
+void SceneDuoChoose::Init()
 {
 	texIds.push_back("graphics/mainbackground.png");
-	texIds.push_back("graphics/solomode.png");
 	texIds.push_back("graphics/duomode.png");
 
 	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
 	AddGameObject(new SpriteGo("graphics/mainbackground.png"));
 
-	solo = (SpriteGo*)AddGameObject(new SpriteGo("graphics/solomode.png"));
-	solo->SetOrigin(Origins::MC);
-	duo = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
-	duo->SetOrigin(Origins::MC);
+	classic = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
+	classic->SetOrigin(Origins::MC);
+	challange = (SpriteGo*)AddGameObject(new SpriteGo("graphics/duomode.png"));
+	challange->SetOrigin(Origins::MC);
 
 	gameModeUI = (GameModeUI*)AddGameObject(new GameModeUI());
+	gameModeUI->SetChooseBarSize({ 700.f,130.f });
+	gameModeUI->SetTextMessages({"Classic","Challange"});
 
 	Scene::Init();
 }
 
-void SceneGMChoose::Enter()
+void SceneDuoChoose::Enter()
 {
 	Scene::Enter();
 
 	sf::FloatRect bound = FRAMEWORK.GetWindowBounds();
 
-	solo->SetScale({ 0.4f,0.4f });
-	solo->SetPosition({ bound.width / 2.f - 450.f, 400.f });
+	classic->SetScale({ 0.4f,0.4f });
+	classic->SetPosition({ bound.width / 2.f - 450.f, 400.f });
 
-	duo->SetScale({ 0.4f,0.4f });
-	duo->SetPosition({ bound.width / 2.f + 450.f, 400.f });
+	challange->SetScale({ 0.4f,0.4f });
+	challange->SetPosition({ bound.width / 2.f + 450.f, 400.f });
 }
 
-void SceneGMChoose::Exit()
+void SceneDuoChoose::Exit()
 {
 	Scene::Exit();
 }
 
-void SceneGMChoose::Update(float dt)
+void SceneDuoChoose::Update(float dt)
 {
 	Scene::Update(dt);
 
@@ -64,11 +63,11 @@ void SceneGMChoose::Update(float dt)
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !gameModeUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
-		SCENE_MGR.ChangeScene(SceneIds::SoloCharacterChoose);
+		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 	}
 	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && gameModeUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
-		SCENE_MGR.ChangeScene(SceneIds::DuoMode);
+		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 	}
 }

@@ -19,7 +19,7 @@ SceneGame::~SceneGame()
 
 void SceneGame::Init()
 {
-    texIds.push_back("graphics/background.png");
+    texIds.push_back("graphics/mainbackground.png");
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
     texIds.push_back("graphics/tree.png");
@@ -28,11 +28,11 @@ void SceneGame::Init()
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
 
-    fontIds.push_back("fonts/KOMIKAP_.ttf");
+    fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
     //
 
-    AddGameObject(new SpriteGo("graphics/background.png"));
+    AddGameObject(new SpriteGo("graphics/mainbackground.png"));
     
     for (int i = 0; i < 3; ++i)
     {

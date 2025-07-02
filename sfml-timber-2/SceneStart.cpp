@@ -2,8 +2,6 @@
 #include "SceneStart.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
-#include "Player.h"
-#include "Tree.h"
 #include "GameStartUI.h"
 
 SceneStart::SceneStart()
@@ -17,22 +15,13 @@ SceneStart::~SceneStart()
 
 void SceneStart::Init()
 {
-	texIds.push_back("graphics/background.png");
-	texIds.push_back("graphics/player.png");
-	texIds.push_back("graphics/tree.png");
+	texIds.push_back("graphics/mainbackground.png");
 
-	fontIds.push_back("fonts/KOMIKAP_.ttf");
+	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
-	AddGameObject(new SpriteGo("graphics/background.png"));
+	AddGameObject(new SpriteGo("graphics/mainbackground.png"));
 
-	for (int i = 0; i < 3; i++)
-	{
-		tree[i] = (Tree*)AddGameObject(new Tree());
-	}
-
-	player = (Player*)AddGameObject(new Player());
-
-	TextGo* go = new TextGo("fonts/KOMIKAP_.ttf");
+	TextGo* go = new TextGo("fonts/Galmuri11-Bold.ttf");
 	go->SetString("Timber Game!");
 	go->SetCharacterSize(150);
 	go->SetFillColor(sf::Color::White);
@@ -49,7 +38,7 @@ void SceneStart::Enter()
 {
 	Scene::Enter();
 
-	player->SetPosition({ 100.f, 1000.f });
+	/*player->SetPosition({ 100.f, 1000.f });
 	player->SetScale({ -5.f, 5.f });
 	sf::Vector2f treePos = tree[0]->GetPosition();
 	sf::Vector2f offset = { 150.f,0.f };
@@ -57,7 +46,7 @@ void SceneStart::Enter()
 	{
 		tree[i]->SetPosition(treePos);
 		treePos.x += 350.f;
-	}
+	}*/
 }
 
 void SceneStart::Exit()

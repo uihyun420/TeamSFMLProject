@@ -6,13 +6,23 @@ GameModeUI::GameModeUI(const std::string& name)
 {
 }
 
+void GameModeUI::SetTextMessages(std::vector<std::string> messages)
+{
+	for (int i = 0; i < menuCount; i++)
+	{
+		textMessages[i] = messages[i];
+
+	}
+}
+
 void GameModeUI::Init()
 {
-	fontId = "fonts/KOMIKAP_.ttf";
+	fontId = "fonts/Galmuri11-Bold.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 	textPos.push_back({ bounds.width * 0.5f - 450.f, 800.f });
 	textPos.push_back({ bounds.width * 0.5f + 450.f, 800.f });
+
 	for (int i = 0; i < menuCount; i++)
 	{
 		texts[i].SetCharacterSize(100);
@@ -22,7 +32,7 @@ void GameModeUI::Init()
 	}
 
 	chooseBar.setFillColor(sf::Color(0, 0, 0, 0));
-	chooseBar.setOutlineColor(sf::Color::Black);
+	chooseBar.setOutlineColor(sf::Color::Yellow);
 	chooseBar.setOutlineThickness(5.f);
 	chooseBar.setSize(chooseBarSize);
 	Utils::SetOrigin(chooseBar, Origins::MC);
@@ -41,17 +51,17 @@ void GameModeUI::Reset()
 	}
 
 	chooseBarPos = 0;
-	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 15.f });
 }
 
 void GameModeUI::Update(float dt)
 {
-	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 15.f });
 	for (int i = 0; i < menuCount; i++)
 	{
 		if (i == chooseBarPos)
 		{
-			texts[i].SetFillColor(sf::Color::Black);
+			texts[i].SetFillColor(sf::Color::Yellow);
 		}
 		else
 		{

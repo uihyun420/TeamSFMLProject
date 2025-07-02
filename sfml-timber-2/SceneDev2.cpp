@@ -9,9 +9,9 @@ SceneDev2::SceneDev2()
 
 void SceneDev2::Init()
 {
-	fontIds.push_back("fonts/KOMIKAP_.ttf");
+	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
-	TextGo* go = new TextGo("fonts/KOMIKAP_.ttf");
+	TextGo* go = new TextGo("fonts/Galmuri11-Bold.ttf");
 	go->SetString("duo character choose scene");
 	go->SetCharacterSize(30);
 	go->SetFillColor(sf::Color::White);

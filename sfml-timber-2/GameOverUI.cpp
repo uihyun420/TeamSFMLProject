@@ -8,7 +8,7 @@ GameOverUI::GameOverUI(const std::string& name)
 
 void GameOverUI::Init()
 {
-	fontId = "fonts/KOMIKAP_.ttf";
+	fontId = "fonts/Galmuri11-Bold.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 	textPos.push_back({ bounds.width * 0.5f, 350 });
@@ -24,7 +24,7 @@ void GameOverUI::Init()
 	}
 
 	chooseBar.setFillColor(sf::Color(0, 0, 0, 0));
-	chooseBar.setOutlineColor(sf::Color::Black);
+	chooseBar.setOutlineColor(sf::Color::Yellow);
 	chooseBar.setOutlineThickness(5.f);
 	chooseBar.setSize(chooseBarSize);
 	Utils::SetOrigin(chooseBar, Origins::MC);
@@ -43,17 +43,17 @@ void GameOverUI::Reset()
 	}
 
 	chooseBarPos = 1;
-	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 15.f });
 }
 
 void GameOverUI::Update(float dt)
 {
-	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 25.f });
+	chooseBar.setPosition(textPos[chooseBarPos] + sf::Vector2f{ 0.f, 15.f });
 	for (int i = 0; i < menuCount; i++)
 	{
 		if (i == chooseBarPos)
 		{
-			texts[i].SetFillColor(sf::Color::Black);
+			texts[i].SetFillColor(sf::Color::Yellow);
 		}
 		else
 		{

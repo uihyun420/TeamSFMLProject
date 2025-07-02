@@ -1,15 +1,11 @@
 #pragma once
 #include "Scene.h"
 
-class Player;
-class Tree;
 class GameStartUI;
 
 class SceneStart :public Scene
 {
 protected:
-	Player* player;
-	Tree* tree[3];
 	GameStartUI* startUI;
 
 public:
