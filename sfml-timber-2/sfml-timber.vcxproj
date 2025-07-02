@@ -143,6 +143,7 @@
     <ClCompile Include="BackgroundElement.cpp" />
     <ClCompile Include="CharacterInfo.cpp" />
     <ClCompile Include="CharacterSelectScene.cpp" />
+    <ClCompile Include="DuoCharacterSelectScene.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="BackgroundElement.h" />
     <ClInclude Include="CharacterInfo.h" />
     <ClInclude Include="CharacterSelectScene.h" />
+    <ClInclude Include="DuoCharacterSelectScene.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\Defines.h" />
     <ClInclude Include="Framework\GameObject.h" />
