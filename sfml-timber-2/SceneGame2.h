@@ -22,6 +22,7 @@ protected:
 	UiHud* uiHud2 = nullptr;
 
 	MenuUI* menuUI;
+	MenuUI* menuUI2;
 
 	std::vector <BackgroundElement*> Logs;
 

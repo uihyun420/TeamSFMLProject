@@ -93,6 +93,36 @@ void SceneGame3::Init()
     menuUI->SetNotChoosedColor(sf::Color::White);
     menuUI->SetChooseBarPos(1);
 
+    menuUI2 = (MenuUI*)AddGameObject(new MenuUI());
+
+    menuUI2->SetFontId("fonts/Galmuri11-Bold.ttf");
+
+    menuUI2->AddTextPos({ bounds.width * 0.5f, 350 });
+    menuUI2->AddTextPos({ bounds.width * 0.5f, 550 });
+    menuUI2->AddTextPos({ bounds.width * 0.5f, 750 });
+
+    menuUI2->AddMessages("Go to Home!");
+    menuUI2->AddMessages("Game Restart!");
+    menuUI2->AddMessages("Game Resume!");
+
+    for (int i = 0; i < menuUI2->GetMenuCount(); i++)
+    {
+        TextGo text;
+        text.SetCharacterSize(100);
+        text.SetFillColor(sf::Color::White);
+        text.SetPosition(menuUI2->GetTextPos()[i]);
+        text.SetOrigin(Origins::MC);
+        menuUI2->AddTextGo(text);
+    }
+
+    menuUI2->SetChooseBarColor(sf::Color(0, 0, 0, 0));
+    menuUI2->SetChooseBarOutColor(sf::Color::Yellow);
+    menuUI2->SetChooseBarThickness(5.f);
+    menuUI2->SetChooseBarSize({ 800.f, 130.f });
+    menuUI2->SetChoosedColor(sf::Color::Yellow);
+    menuUI2->SetNotChoosedColor(sf::Color::White);
+    menuUI2->SetChooseBarPos(1);
+
     Scene::Init();
 }
 
@@ -120,6 +150,7 @@ void SceneGame3::Enter()
     uiHud2->SetMessage("Enter to Start!");
 
     menuUI->SetActive(false);
+    menuUI2->SetActive(false);
 }
 
 void SceneGame3::Exit()
@@ -153,6 +184,13 @@ void SceneGame3::Update(float dt)
 
     if (isPlaying)
     {
+        if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+        {
+            isPlaying = false;
+            menuUI2->SetActive(true);
+            FRAMEWORK.SetTimeScale(0.f);
+        }
+
         bgTime += dt;
         if (bgTime > 0.3f) {
             tree->UpdateBranches();
@@ -268,47 +306,101 @@ void SceneGame3::Update(float dt)
                 log->SetActive(false);
             }
         }
-        if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+        if (!menuUI2->GetActive())
         {
-            menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
-        }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
-        {
-            menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
-        }
+            if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+            {
+                menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
+            }
+            else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+            {
+                menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
+            }
 
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
-        {
-            SCENE_MGR.ChangeScene(SceneIds::GameStart);
+            if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
+            {
+                SCENE_MGR.ChangeScene(SceneIds::GameStart);
+            }
+            else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
+            {
+                FRAMEWORK.GetWindow().close();
+            }
+            else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+            {
+                FRAMEWORK.SetTimeScale(1.f);
+                player->Reset();
+                player->SetAlive(true);
+                player2->Reset();
+                player2->SetAlive(true);
+                player1Speed = playerInitSpeed;
+                player2Speed = playerInitSpeed;
+                //player2->SetSide(Sides::Left);
+                tree->Reset();
+                beeElement->Reset();
+                isPlaying = true;
+
+                score = 0;
+                uiHud->SetScore(score);
+                uiHud2->SetScore(score);
+
+                timer = 0;
+                uiHud->SetTimeBar(timer / timerMax);
+
+                uiHud->SetShowMassage(false);
+                uiHud2->SetShowMassage(false);
+                menuUI->SetActive(false);
+            }
         }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
+        else
         {
-            FRAMEWORK.GetWindow().close();
-        }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
-        {
-            FRAMEWORK.SetTimeScale(1.f);
-            player->Reset();
-            player->SetAlive(true);
-            player2->Reset();
-            player2->SetAlive(true);
-            player1Speed = playerInitSpeed;
-            player2Speed = playerInitSpeed;
-            //player2->SetSide(Sides::Left);
-            tree->Reset();
-            beeElement->Reset();
-            isPlaying = true;
+            if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+            {
+                menuUI2->SetBarPos((menuUI2->GetBarPos() + 1) % menuUI2->GetMenuCount());
+            }
+            else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+            {
+                menuUI2->SetBarPos((menuUI2->GetBarPos() + 2) % menuUI2->GetMenuCount());
+            }
 
-            score = 0;
-            uiHud->SetScore(score);
-            uiHud2->SetScore(score);
+            if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI2->GetBarPos() == (int)Menu::restart)
+            {
+                for (auto log : Logs)
+                {
+                    log->SetActive(false);
+                }
+                FRAMEWORK.SetTimeScale(1.f);
+                player->Reset();
+                player->SetAlive(true);
+                player2->Reset();
+                player2->SetAlive(true);
+                player1Speed = playerInitSpeed;
+                player2Speed = playerInitSpeed;
+                //player2->SetSide(Sides::Left);
+                tree->Reset();
+                beeElement->Reset();
+                isPlaying = true;
 
-            timer = 0;
-            uiHud->SetTimeBar(timer / timerMax);
+                score = 0;
+                uiHud->SetScore(score);
+                uiHud2->SetScore(score);
 
-            uiHud->SetShowMassage(false);
-            uiHud2->SetShowMassage(false);
-            menuUI->SetActive(false);
+                timer = 0;
+                uiHud->SetTimeBar(timer / timerMax);
+
+                uiHud->SetShowMassage(false);
+                uiHud2->SetShowMassage(false);
+                menuUI2->SetActive(false);
+            }
+            else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI2->GetBarPos() == (int)Menu::home)
+            {
+                SCENE_MGR.ChangeScene(SceneIds::GameStart);
+            }
+            else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) || InputMgr::GetKeyDown(sf::Keyboard::Escape))
+            {
+                FRAMEWORK.SetTimeScale(1.f);
+                isPlaying = true;
+                menuUI2->SetActive(false);
+            }
         }
     }
 

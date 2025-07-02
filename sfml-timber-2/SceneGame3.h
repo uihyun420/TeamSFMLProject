@@ -17,6 +17,7 @@ protected:
 	UiHud* uiHud;
 	UiHud* uiHud2;
 	MenuUI* menuUI;
+	MenuUI* menuUI2;
 
 	BackgroundElement* beeElement;
 
