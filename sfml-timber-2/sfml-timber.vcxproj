@@ -152,6 +152,8 @@
     <ClCompile Include="MenuUI.cpp" />
     <ClCompile Include="SceneDev3.cpp" />
     <ClCompile Include="SceneDuoChoose.cpp" />
+    <ClCompile Include="SceneGame2.cpp" />
+    <ClCompile Include="SceneGame3.cpp" />
     <ClCompile Include="SceneGMChoose.cpp" />
     <ClCompile Include="SceneStart.cpp" />
     <ClCompile Include="main.cpp" />
@@ -162,16 +164,12 @@
     <ClCompile Include="SceneDev2.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
-    <ClCompile Include="SceneGame2.cpp" />
-    <ClCompile Include="SceneGame3.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Tree.cpp" />
-    <ClCompile Include="Framework\UI.cpp" />
-    <ClCompile Include="TreeLog.cpp" />
     <ClCompile Include="UiHud.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +190,8 @@
     <ClInclude Include="MenuUI.h" />
     <ClInclude Include="SceneDev3.h" />
     <ClInclude Include="SceneDuoChoose.h" />
+    <ClInclude Include="SceneGame2.h" />
+    <ClInclude Include="SceneGame3.h" />
     <ClInclude Include="SceneGMChoose.h" />
     <ClInclude Include="SceneStart.h" />
     <ClInclude Include="Player.h" />
@@ -199,14 +199,10 @@
     <ClInclude Include="SceneDev2.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
-    <ClInclude Include="SceneGame2.h" />
-    <ClInclude Include="SceneGame3.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Tree.h" />
-    <ClInclude Include="Framework\UI.h" />
-    <ClInclude Include="TreeLog.h" />
     <ClInclude Include="UiHud.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,9 +10,6 @@ class BackgroundElement;
 class SceneGame : public Scene
 {
 protected:
-	Player* player;
-	Tree* tree;
-	UiHud* uiHud;
 	GameOverUI* overUI;
 	Player* player = nullptr;
 
