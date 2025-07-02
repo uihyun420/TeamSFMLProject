@@ -40,18 +40,6 @@ void DuoCharacterSelectScene::Init()
 	go2->SetFillColor(sf::Color::Black);
 	go2->SetOrigin(Origins::MC);
 
-	//TextGo* go3 = new TextGo("fonts/Galmuri11-Bold.ttf");
-	//go3->SetString("Player 3P");
-	//go3->SetCharacterSize(50);
-	//go3->SetFillColor(sf::Color::Black);
-	//go3->SetOrigin(Origins::MC);
-
-	//TextGo* go4 = new TextGo("fonts/Galmuri11-Bold.ttf");
-	//go4->SetString("Player 4P");
-	//go4->SetCharacterSize(50);
-	//go4->SetFillColor(sf::Color::Black);
-	//go4->SetOrigin(Origins::MC);
-
 	auto bounds = FRAMEWORK.GetWindowBounds();
 	choosePos = {
 		{ bounds.width * 0.2f, 720.f },
@@ -69,7 +57,7 @@ void DuoCharacterSelectScene::Init()
 	AddGameObject(go2);
 
 
-	ids = { "graphics/player.png",	"graphics/player2.png", "graphics/player3.png", "graphics / player4.png" };
+	ids = { "graphics/player.png",	"graphics/player2.png", "graphics/player3.png", "graphics/player4.png" };
 
 	std::vector<sf::Vector2f> pos =
 	{
@@ -79,27 +67,8 @@ void DuoCharacterSelectScene::Init()
 		{bounds.width * 0.8f, 520.f}
 	};
 
-
-	/*go1->SetPosition({ 660.f, 720.f });
-	AddGameObject(go1);
-
-	go2->SetPosition({ 1260.f, 720.f });
-	AddGameObject(go2);*/
-
-
-
-	ids = { "graphics/player.png",	"graphics/player2.png", "graphics/player3.png", "graphics/player4.png" };
-
-	/*std::vector<sf::Vector2f> pos =
-	{
-		{660.f, 520.f},
-		{1260.f, 520.f}
-	};*/
-
 	info = new CharacterInfo(ids, pos);
 	AddGameObject(info);
-
-
 
 	Scene::Init();
 }
@@ -129,8 +98,6 @@ void DuoCharacterSelectScene::Update(float dt)
 		select2 = (select2 + ids.size() + 1) % ids.size();
 	}
 
-	std::cout << select << select2 << std::endl;
-
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
 	{
 		SCENE_MGR.ChangeScene(SCENE_MGR.getScene());
@@ -142,20 +109,6 @@ void DuoCharacterSelectScene::Update(float dt)
 	if (select == select2)
 	{
 		go2->SetPosition(go2->GetPosition() + sf::Vector2f({ 0.f, 50.f }));
-		/*bool isDuo = SCENE_MGR.GetIsDuo();
-		if (isDuo)
-			SCENE_MGR.ChangeScene(SCENE_MGR.GetDuoModeScene());*/
 	}
-
-
-
-	//for (std::size_t i = 0; i < ids.size(); ++i)
-	//{
-	//	bool isActive = (phase == Choice::Choice01 && i == selectedP1) || (phase == Choice::Choice02 && i == selectedP2);
-
-	//	// ������ ��/�ٿ�
-	//	info->SetIconScale(i, isActive ? sf::Vector2f{ 1.3f,1.3f } : sf::Vector2f{ 1.f,1.f }); // ���õ� ���� 130%�� ũ���
-
-	//}
 
 }

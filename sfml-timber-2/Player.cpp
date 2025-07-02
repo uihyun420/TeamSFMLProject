@@ -78,7 +78,6 @@ void Player::Release()
 
 void Player::Reset()
 {
-	std::cout << SCENE_MGR.GetDuo() << std::endl;
 	if(!SCENE_MGR.GetDuo())
 	{
 		texPlayerId = SCENE_MGR.getTexId();
@@ -92,7 +91,6 @@ void Player::Reset()
 		else
 		{
 			texPlayerId = SCENE_MGR.getDuoTexId();
-			std::cout << 2 << std::endl;
 		}
 	}
 

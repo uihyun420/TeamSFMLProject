@@ -308,31 +308,6 @@ void SceneGame2::Update(float dt)
     }
     else
     {
-        if (!player->GetAlive())
-        {
-            for (auto log : Logs)
-            {
-                log->SetActive(false);
-            }
-        }
-        if (InputMgr::GetKeyDown(sf::Keyboard::Down))
-        {
-            menuUI->SetBarPos((menuUI->GetBarPos() + 1) % menuUI->GetMenuCount());
-        }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
-        {
-            menuUI->SetBarPos((menuUI->GetBarPos() + 2) % menuUI->GetMenuCount());
-        }
-
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::home)
-        {
-            SCENE_MGR.ChangeScene(SceneIds::GameStart);
-        }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos() == (int)Menu::exit)
-        {
-            FRAMEWORK.GetWindow().close();
-        }
-        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         if (!player->GetAlive() || !player2->GetAlive())
         {
             for (auto log : Logs)
