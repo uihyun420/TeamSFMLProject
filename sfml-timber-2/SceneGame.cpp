@@ -44,8 +44,6 @@ void SceneGame::Init()
 
     tree = (Tree*)AddGameObject(new Tree());
 
-
-
     BackgroundElement* element = (BackgroundElement*)AddGameObject(
         new BackgroundElement("graphics/bee.png"));
     element->minScale = 1.f;
@@ -128,8 +126,9 @@ void SceneGame::Update(float dt)
                FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
 
-                uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
+                overUI->SetActive(true);
+                /*uiHud->SetShowMassage(true);
+                uiHud->SetMessage("Enter to Restart!");*/
                 isPlaying = false;
             }
             else
@@ -148,7 +147,6 @@ void SceneGame::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-
                 overUI->SetActive(true);
                 /*uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");*/
@@ -189,6 +187,13 @@ void SceneGame::Update(float dt)
     }
     else
     {
+        if (!player->GetAlive())
+        {
+            for (auto log : Logs)
+            {
+                log->SetActive(false);
+            }
+        }
         if (InputMgr::GetKeyDown(sf::Keyboard::Down))
         {
             overUI->SetBarPos((overUI->GetBarPos() + 1) % overUI->GetMenuCount());

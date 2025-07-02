@@ -5,7 +5,7 @@
 
 
 CharacterSelectScene::CharacterSelectScene()
-	:Scene(SceneIds::CharacterSelect)
+	:Scene(SceneIds::SoloCharacterChoose)
 {
 }
 
@@ -13,28 +13,28 @@ CharacterSelectScene::CharacterSelectScene()
 
 void CharacterSelectScene::Init()
 {
-	texIds.push_back("graphics/background1.png");
+	texIds.push_back("graphics/mainbackground.png");
 	
-	AddGameObject(new SpriteGo("graphics/background1.png"));
+	AddGameObject(new SpriteGo("graphics/mainbackground.png"));
 
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/player2.png");
-	fontIds.push_back("fonts/KOMIKAP_.ttf");
+	fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
 
-	TextGo* go = new TextGo("fonts/KOMIKAP_.ttf");
+	TextGo* go = new TextGo("fonts/Galmuri11-Bold.ttf");
 	go->SetString("Character Select");
 	go->SetCharacterSize(100);
 	go->SetFillColor(sf::Color::White);
 	go->SetOrigin(Origins::MC);
 
-	TextGo* go1 = new TextGo("fonts/KOMIKAP_.ttf");
+	TextGo* go1 = new TextGo("fonts/Galmuri11-Bold.ttf");
 	go1->SetString("Player 1P");
 	go1->SetCharacterSize(50);
 	go1->SetFillColor(sf::Color::Black);
 	go1->SetOrigin(Origins::MC);
 
-	TextGo* go2 = new TextGo("fonts/KOMIKAP_.ttf");
+	TextGo* go2 = new TextGo("fonts/Galmuri11-Bold.ttf");
 	go2->SetString("Player 2P");
 	go2->SetCharacterSize(50);
 	go2->SetFillColor(sf::Color::Black);
@@ -93,6 +93,6 @@ void CharacterSelectScene::Update(float dt)
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SCENE_MGR.ChangeScene(SceneIds::Game);
+		SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
 	}
 }

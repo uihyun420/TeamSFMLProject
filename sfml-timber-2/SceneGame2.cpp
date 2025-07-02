@@ -8,7 +8,7 @@
 #include "UiHud.h"
 
 SceneGame2::SceneGame2()
-    : Scene(SceneIds::Game)
+    : Scene(SceneIds::Player2Mode)
 {
 }
 

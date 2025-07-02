@@ -8,7 +8,7 @@
 #include "UiHud.h"
 
 SceneGame3::SceneGame3()
-    : Scene(SceneIds::Game)
+    : Scene(SceneIds::ChallangeMode)
 {
 }
 

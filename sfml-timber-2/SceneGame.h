@@ -10,7 +10,7 @@ class BackgroundElement;
 class SceneGame : public Scene
 {
 protected:
-	GameOverUI* overUI;
+	GameOverUI* overUI = nullptr;
 	Player* player = nullptr;
 
 	Tree* tree = nullptr;
@@ -33,7 +33,6 @@ protected:
 public:
 	SceneGame();
 	~SceneGame() override;
-
 
 	void Init() override;
 
