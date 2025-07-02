@@ -99,4 +99,9 @@ void SceneGMChoose::Update(float dt)
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
 		SCENE_MGR.ChangeScene(SceneIds::DuoMode);
 	}
+	else if (InputMgr::GetKeyDown(sf::Keyboard::BackSpace))
+	{
+		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
+		SCENE_MGR.ChangeScene(SceneIds::GameStart);
+	}
 }

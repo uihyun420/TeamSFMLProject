@@ -100,6 +100,11 @@ void CharacterSelectScene::Update(float dt)
 {
 	int& select = (phase == Choice::Choice01 ? selectedP1 : selectedP2);
 
+	if (InputMgr::GetKeyDown(sf::Keyboard::BackSpace))
+	{
+		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
+		SCENE_MGR.ChangeScene(SceneIds::GameStart);
+	}
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Left))
 	{
@@ -116,6 +121,11 @@ void CharacterSelectScene::Update(float dt)
 		std::cout << "ÀÎµ¦½º : " << select << std::endl;
 		SCENE_MGR.setTexId(ids[select]);
 	    SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
+	}
+	else if (InputMgr::GetKeyDown(sf::Keyboard::BackSpace))
+	{
+		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
+		SCENE_MGR.ChangeScene(SceneIds::GameMode);
 	}
 
 

@@ -103,6 +103,11 @@ void DuoCharacterSelectScene::Update(float dt)
 		SCENE_MGR.ChangeScene(SCENE_MGR.getScene());
 		SCENE_MGR.setTexId(ids[select], true, ids[select2]);
 	} 
+	else if (InputMgr::GetKeyDown(sf::Keyboard::BackSpace))
+	{
+		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
+		SCENE_MGR.ChangeScene(SceneIds::DuoMode);
+	}
 	go1->SetPosition(choosePos[select]);
 	go2->SetPosition(choosePos[select2]);
 

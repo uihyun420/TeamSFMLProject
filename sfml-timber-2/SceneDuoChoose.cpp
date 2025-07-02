@@ -101,4 +101,9 @@ void SceneDuoChoose::Update(float dt)
 		SCENE_MGR.setScene(SceneIds::ChallangeMode);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose, true, SceneIds::ChallangeMode);
 	}
+	else if (InputMgr::GetKeyDown(sf::Keyboard::BackSpace))
+	{
+		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
+		SCENE_MGR.ChangeScene(SceneIds::GameMode);
+	}
 }
