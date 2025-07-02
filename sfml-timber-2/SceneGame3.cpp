@@ -105,7 +105,6 @@ void SceneGame3::Enter()
     player->SetPosition(pos);
     player2->SetPosition(pos);
     player2->SetSide(Sides::Left);
-    player2->SetTexId("graphics/player2.png");
 
     score = 0;
     uiHud->SetScore(score);
