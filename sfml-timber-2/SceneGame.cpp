@@ -6,9 +6,10 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
+#include "GameOverUI.h"
 
 SceneGame::SceneGame()
-	: Scene(SceneIds::Game)
+	: Scene(SceneIds::Player1Mode)
 {
 }
 
@@ -29,7 +30,7 @@ void SceneGame::Init()
     texIds.push_back("graphics/rip.png");
     texIds.push_back("graphics/log.png");
 
-    fontIds.push_back("fonts/KOMIKAP_.ttf");
+    fontIds.push_back("fonts/Galmuri11-Bold.ttf");
 
     //
 
@@ -59,6 +60,8 @@ void SceneGame::Init()
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
+    overUI = (GameOverUI*)AddGameObject(new GameOverUI());
+
     Scene::Init();
 }
 
@@ -78,6 +81,10 @@ void SceneGame::Enter()
 
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
+
+    overUI->SetActive(false);
+
+    isPlaying = false;
 }
 
 void SceneGame::Exit()
@@ -142,8 +149,9 @@ void SceneGame::Update(float dt)
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
 
-                uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
+                overUI->SetActive(true);
+                /*uiHud->SetShowMassage(true);
+                uiHud->SetMessage("Enter to Restart!");*/
             }
             else
             {
@@ -173,14 +181,32 @@ void SceneGame::Update(float dt)
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
 
-            uiHud->SetShowMassage(true);
-            uiHud->SetMessage("Enter to Restart!");
+            overUI->SetActive(true);
+            /*uiHud->SetShowMassage(true);
+            uiHud->SetMessage("Enter to Restart!");*/
         }
         uiHud->SetTimeBar(timer / timerMax);
     }
     else
     {
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+        if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+        {
+            overUI->SetBarPos((overUI->GetBarPos() + 1) % overUI->GetMenuCount());
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+        {
+            overUI->SetBarPos((overUI->GetBarPos() + 2) % overUI->GetMenuCount());
+        }
+
+        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos() == (int)Menu::home)
+        {
+            SCENE_MGR.ChangeScene(SceneIds::GameStart);
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && overUI->GetBarPos() == (int)Menu::exit)
+        {
+            FRAMEWORK.GetWindow().close();
+        }
+        else if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {
             FRAMEWORK.SetTimeScale(1.f);
             player->Reset();
@@ -194,7 +220,9 @@ void SceneGame::Update(float dt)
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);
+            overUI->SetActive(false);
         }
+        
     }
 
     

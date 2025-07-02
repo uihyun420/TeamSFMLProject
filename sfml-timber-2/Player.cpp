@@ -33,6 +33,13 @@ void Player::SetSide(Sides s)
 	axe.setScale(scales[(int)side]);
 }
 
+void Player::SetScale(const sf::Vector2f& scale)
+{
+	this->scale = scale;
+	sprite.setScale(scale);
+	axe.setScale(scale);
+}
+
 void Player::SetPosition(const sf::Vector2f& pos)
 {
 	position = pos;

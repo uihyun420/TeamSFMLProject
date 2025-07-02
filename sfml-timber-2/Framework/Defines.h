@@ -13,6 +13,14 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
+	GameStart,
+	GameMode,
+	DuoMode,
+	Player1Mode,
+	Player2Mode,
+	ChallangeMode,
+	SoloCharacterChoose,
+	DuoCharacterChoose,
 	CharacterSelect,
 	Game,
 	Game2,

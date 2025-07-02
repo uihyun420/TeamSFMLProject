@@ -26,7 +26,7 @@ void UiHud::SetTimeBar(float value)
 
 void UiHud::Init()
 {
-	fontId = "fonts/KOMIKAP_.ttf";
+	fontId = "fonts/Galmuri11-Bold.ttf";
 
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 
@@ -59,7 +59,7 @@ void UiHud::Reset()
 	textMessage.setFont(FONT_MGR.Get(fontId));
 
 	SetScore(0);
-	isShowMessage = true;
+	isShowMessage = false;
 	SetMessage("Message!");
 	SetTimeBar(1.f);
 }

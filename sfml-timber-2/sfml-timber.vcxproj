@@ -146,6 +146,14 @@
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
+    <ClCompile Include="GameModeUI.cpp" />
+    <ClCompile Include="GameOverUI.cpp" />
+    <ClCompile Include="GameStartUI.cpp" />
+    <ClCompile Include="MenuUI.cpp" />
+    <ClCompile Include="SceneDev3.cpp" />
+    <ClCompile Include="SceneDuoChoose.cpp" />
+    <ClCompile Include="SceneGMChoose.cpp" />
+    <ClCompile Include="SceneStart.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Framework\SpriteGo.cpp" />
     <ClCompile Include="Framework\Scene.cpp" />
@@ -162,6 +170,7 @@
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="Framework\UI.cpp" />
     <ClCompile Include="TreeLog.cpp" />
     <ClCompile Include="UiHud.cpp" />
   </ItemGroup>
@@ -177,6 +186,14 @@
     <ClInclude Include="Framework\Singleton.h" />
     <ClInclude Include="Framework\SpriteGo.h" />
     <ClInclude Include="Framework\Scene.h" />
+    <ClInclude Include="GameModeUI.h" />
+    <ClInclude Include="GameOverUI.h" />
+    <ClInclude Include="GameStartUI.h" />
+    <ClInclude Include="MenuUI.h" />
+    <ClInclude Include="SceneDev3.h" />
+    <ClInclude Include="SceneDuoChoose.h" />
+    <ClInclude Include="SceneGMChoose.h" />
+    <ClInclude Include="SceneStart.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneDev1.h" />
     <ClInclude Include="SceneDev2.h" />
@@ -188,6 +205,7 @@
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Tree.h" />
+    <ClInclude Include="Framework\UI.h" />
     <ClInclude Include="TreeLog.h" />
     <ClInclude Include="UiHud.h" />
   </ItemGroup>

@@ -4,13 +4,29 @@
 #include "SceneGame2.h"
 #include "SceneDev1.h"
 #include "SceneDev2.h"
+#include "SceneDev3.h"
+#include "SceneStart.h"
+#include "SceneGMChoose.h"
+#include "SceneDuoChoose.h"
 #include "CharacterSelectScene.h"
 
 void SceneMgr::Init()
 {
 	
+	scenes.push_back(new SceneStart());
+	scenes.push_back(new SceneGMChoose());
+	scenes.push_back(new SceneDuoChoose());
+	
 	scenes.push_back(new CharacterSelectScene());
 	scenes.push_back(new SceneGame());
+	//scenes.push_back(new SceneDuoMode());
+	scenes.push_back(new SceneDev3());
+	//scenes.push_back(new SceneChallangeMode());
+	scenes.push_back(new SceneDev3());
+	//scenes.push_back(new SceneSingleChoose());
+	scenes.push_back(new SceneDev1());
+	//scenes.push_back(new SceneDuoChoose());
+	scenes.push_back(new SceneDev2());
 	scenes.push_back(new SceneGame2());
 	scenes.push_back(new SceneDev1());
 	scenes.push_back(new SceneDev2());
