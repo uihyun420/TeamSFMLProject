@@ -6,7 +6,6 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
-#include "GameOverUI.h"
 #include "CharacterSelectScene.h"
 #include "DuoCharacterSelectScene.h"
 
@@ -101,14 +100,10 @@ void SceneGame::Init()
 void SceneGame::Enter()
 {
     Scene::Enter();
-
-
-
-
- 
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
+    
 
     score = 0;
     uiHud->SetScore(score);

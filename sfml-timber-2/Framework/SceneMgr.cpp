@@ -61,6 +61,20 @@ void SceneMgr::ChangeScene(SceneIds id)
 	nextScene = id;
 }
 
+void SceneMgr::setTexId(const std::string& s, bool solo , const std::string& duo)
+{
+	if (!solo)
+	{
+		texId = s;
+	}
+	else
+	{
+		texId = s;
+		texId2 = duo;
+		isDuo = true;
+	}
+}
+
 void SceneMgr::Update(float dt)
 {
 	if (nextScene != SceneIds::None)
@@ -83,24 +97,3 @@ void SceneMgr::Draw(sf::RenderWindow& window)
 
 
 
-
-
-void SceneMgr::SetChosenChar1(const std::string& s)
-{
-	chosenChar1 = s;
-}
-
-void SceneMgr::SetChosenChar2(const std::string& s)
-{
-	chosenChar2 = s;
-}
-
-const std::string& SceneMgr::GetChosenChar1()
-{
-	return chosenChar1;
-}
-
-const std::string& SceneMgr::GetChosenChar2()
-{
-	return chosenChar2;
-}

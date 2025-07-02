@@ -24,6 +24,16 @@ const std::string& CharacterSelectScene::GetselectedP2()
 	return ids[selectedP2];
 }
 
+const std::string& CharacterSelectScene::GetselectedP3()
+{
+	return ids[selectedP3];
+}
+
+const std::string& CharacterSelectScene::GetselectedP4()
+{
+	return ids[selectedP4];
+}
+
 
 
 void CharacterSelectScene::Init()
@@ -60,13 +70,11 @@ void CharacterSelectScene::Init()
 	go->SetPosition({ bounds.width * 0.5f, 150.f });
 	AddGameObject(go);
 
-
 	go1->SetPosition({ 660.f, 720.f });
 	AddGameObject(go1);
 
 	go2->SetPosition({ 1260.f, 720.f });
 	AddGameObject(go2);
-
 
 
 	ids = { "graphics/player.png",	"graphics/player2.png" };
@@ -76,6 +84,7 @@ void CharacterSelectScene::Init()
 		{660.f, 520.f},
 		{1260.f, 520.f}
 	};
+
 
 	info = new CharacterInfo(ids, pos);
 	AddGameObject(info);
@@ -103,16 +112,10 @@ void CharacterSelectScene::Update(float dt)
 
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
-	{
-		if (phase == Choice::Choice01)
-		{
-			phase = Choice::Choice02;
-		}
-		else
-		{
-			
-			SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
-		}
+	{	
+		std::cout << "ÀÎµ¦½º : " << select << std::endl;
+		SCENE_MGR.setTexId(ids[select]);
+	    SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
 	}
 
 

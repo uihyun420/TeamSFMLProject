@@ -89,11 +89,13 @@ void SceneDuoChoose::Update(float dt)
 	if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player1Mode);
+		SCENE_MGR.setScene(SceneIds::Player2Mode);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 	}
 	else if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && menuUI->GetBarPos())
 	{
 		//SCENE_MGR.ChangeScene(SceneIds::Player2Mode);
+		SCENE_MGR.setScene(SceneIds::ChallangeMode);
 		SCENE_MGR.ChangeScene(SceneIds::DuoCharacterChoose);
 	}
 }
