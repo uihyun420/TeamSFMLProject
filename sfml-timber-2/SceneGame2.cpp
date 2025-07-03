@@ -337,7 +337,7 @@ void SceneGame2::Update(float dt)
     }
     else
     {
-        if (score > 0 || score2 > 0) {
+        if ((score > 0 || score2 > 0) && !player->GetAlive() && !player2->GetAlive()) {
             if(score > score2) uiHud->SetShowWin(true);
             if(score < score2) uiHud->SetShowWin2(true);
         }
