@@ -13,14 +13,13 @@ SceneStart::SceneStart()
 
 SceneStart::~SceneStart()
 {
-
 }
 
 void SceneStart::Init()
 {
 	bgm.openFromFile("sound/BGM_01.wav");
-	
 	bgm.setLoop(true);
+	bgm.setVolume(bgmVolume);
 	bgm.play();
 	
 
@@ -97,4 +96,20 @@ void SceneStart::Update(float dt)
 	{
 		FRAMEWORK.GetWindow().close();
 	}
+
+
+
+	if (InputMgr::GetKeyDown(sf::Keyboard::Num1))
+	{
+		bgmVolume = std::max(0.f, bgmVolume - 10.f);
+		bgm.setVolume(bgmVolume);
+	}
+	else if (InputMgr::GetKeyDown(sf::Keyboard::Num2))
+	{
+		bgmVolume = std::min(100.f, bgmVolume + 10.f);
+		bgm.setVolume(bgmVolume);
+	}
+
+
+
 }

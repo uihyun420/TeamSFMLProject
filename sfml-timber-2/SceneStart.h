@@ -10,6 +10,9 @@ protected:
 	MenuUI* menuUI;
 
 	sf::Music bgm;
+	float bgmVolume = 100.f;
+
+
 
 public:
 	SceneStart();
